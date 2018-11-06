@@ -1,4 +1,4 @@
-# doubanApp
+# webApp
 用 vue2.0 实现仿app，将用到 vue-router+webpack+axios+vuex
 
 ## Build Setup
