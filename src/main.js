@@ -13,6 +13,11 @@ import uploader from 'vue-easy-uploader'
 import Vuex from 'vuex'
 import preview from 'vue-photo-preview'
 import 'vue-photo-preview/dist/skin.css'
+import VideoPlayer from 'vue-video-player'
+require('video.js/dist/video-js.css')
+require('vue-video-player/src/custom-theme.css')
+Vue.use(VideoPlayer)
+
 Vue.use(preview)
 Vue.use(Vuex)
 Vue.use(uploader,store)

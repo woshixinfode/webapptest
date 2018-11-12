@@ -7,11 +7,11 @@
   import mTabbarItem from './tabbar-item';
   export default {
     props: ['value'],
-    // computed: {
-    //   value() {
-    //     return this.$route.matched[0].name
-    //   }
-    // }
+    computed: {
+      value1() {
+        return this.$route.matched[0].name
+      }
+    }
   }
 
 </script>

@@ -35,7 +35,7 @@
         },
         computed: {
            isActive(){
-               if(this.$parent.value===this.id){
+               if(this.$parent.value1===this.id){
                    return true;
                }
            }

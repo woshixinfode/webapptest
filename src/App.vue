@@ -44,7 +44,12 @@ export default {
       return {
         select:"Index"
       }
+    },
+  watch:{
+    $route(){
+      console.log('改变路由',this.$route.path)
     }
+  }
 }
 </script>
 
