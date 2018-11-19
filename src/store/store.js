@@ -4,9 +4,11 @@ import {SHOW_LOADING,HIDE_LOADING} from './type';
 Vue.use(Vuex);
 
 const state={
+  showBottomNav:true,
 	loading:false,
   isShow:false,
-
+  hasMessagemine:true,
+  hasMessagevideo:true,
   img_upload_cache: [],
   img_paths: [],
   img_status: 'ready' // 上传状态 ready selected uploading finished
@@ -34,6 +36,15 @@ const mutations={
   },
   set_img_status (state, arg) {
     state.img_status = arg
+  },
+
+  changemineDot(state){
+	  console.log("hasMessagemine = false")
+	  state.hasMessagemine = false;
+  },
+  changevideoDot(state){
+	  console.log("hasMessagevideo = false")
+	  state.hasMessagevideo = false;
   }
 }
 
@@ -49,6 +60,14 @@ const actions={
   },
   hideSideBar({commit}){
     commit('hideBar')
+  },
+  hadSee({commit},arg){
+    if(arg == 'Mine'){
+      commit('changemineDot')
+    }
+    if(arg == 'AudioBook'){
+      commit('changevideoDot')
+    }
   }
 }
 

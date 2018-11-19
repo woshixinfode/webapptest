@@ -5,14 +5,35 @@ import Broadcast from '../pages/Broadcast/Broadcast'
 import AudioBook from '../pages/AudioBook/AudioBook'
 import Group from '../pages/Group/Group'
 import Mine from '../pages/Mine/Mine'
+import Loginview from '../pages/Loginview/Loginview'
+import Login from '../pages/Login/Login'
+import Forgetpwd from '../pages/Forgetpwd/Forgetpwd'
 Vue.use(Router)
 
 export default new Router({
+  mode:'history',
   routes: [
+    {
+      path: '/login',
+      name: 'Login',
+      component: Loginview,
+      children:[
+        {
+          path:'/',
+          name:'loginPage',
+          component:Login
+        },
+        {
+          path:'forgetpwd',
+          name:'forgetPwd',
+          component:Forgetpwd
+        }
+      ]
+    },
     {
       path: '/',
       name: 'Index',
-      component: Index
+      component: Index,
     },
     {
       path: '/broadcast',
@@ -41,9 +62,9 @@ export default new Router({
       path: '/Index',
       redirect: '/'
     },
-    {
-      path: '*',
-      redirect: '/'
-    },
+    // {
+    //   path: '*',
+    //   redirect: '/'
+    // },
   ]
 })

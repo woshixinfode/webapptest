@@ -1,13 +1,15 @@
 <template>
   <div class="gallery">
+    <div class="plms"><a @click="hxpl()">横向排列</a><a @click="sxpl()">竖向排列</a></div>
     <div class="item">
-      <img class="previewer-demo-img" v-for="(item, index) in itemlist" :src="item.src" width="100" preview="repairDetail" preview-text="这里是测试文字这里是测试文字这里是测试文字这里是测试文字这里是测试文字这里是测试文字这里是测试文字这里是测试文字">
-           <!--@click="show(index)">-->
-
+      <div v-for="(item, index) in itemlist">
+        <img v-if="item.type == 'pic'" class="previewer-demo-img" :class= "isHundred?'img100':''"
+              :src="item.src" width="100" preview="repairDetail" :preview-text='item.preview_text'>
+          <div v-if="item.type == 'array'">
+            <img  :src="item.src" :class= "isHundred?'img100':''" width="100" alt="">
+          </div>
+      </div>
     </div>
-    <!--<div v-transfer-dom>-->
-      <!--<previewer :list="itemlist" ref="previewer" :options="options" @on-index-change="logIndexChange"></previewer>-->
-    <!--</div>-->
   </div>
 </template>
 
@@ -21,35 +23,45 @@
       TransferDom
     },
     components: {
-      Previewer
+      // Previewer
     },
     methods: {
-      logIndexChange(arg) {
-        console.log(arg)
+      // logIndexChange(arg) {
+      //   console.log(arg)
+      // },
+      // show(index) {
+      //   this.$refs.previewer.show(index)
+      // },
+      // hdp(){
+      //
+      // }
+      sxpl(){
+        this.isHundred = true
       },
-      show(index) {
-        this.$refs.previewer.show(index)
+      hxpl(){
+        this.isHundred = false
       }
     },
     data() {
       return {
         // itemlist:this.props.item,
         list: [],
-        options: {
-          getThumbBoundsFn(index) {
-            // find thumbnail element
-            let thumbnail = document.querySelectorAll('.previewer-demo-img')[index]
-            // get window scroll Y
-            let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
-            // optionally get horizontal scroll
-            // get position of element relative to viewport
-            let rect = thumbnail.getBoundingClientRect()
-            // w = width
-            return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
-            // Good guide on how to get element coordinates:
-            // http://javascript.info/tutorial/coordinates
-          }
-        }
+        isHundred:false,
+        //options: {
+          // getThumbBoundsFn(index) {
+          //   // find thumbnail element
+          //   let thumbnail = document.querySelectorAll('.previewer-demo-img')[index]
+          //   // get window scroll Y
+          //   let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
+          //   // optionally get horizontal scroll
+          //   // get position of element relative to viewport
+          //   let rect = thumbnail.getBoundingClientRect()
+          //   // w = width
+          //   return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
+          //   // Good guide on how to get element coordinates:
+          //   // http://javascript.info/tutorial/coordinates
+          // }
+       // }
       }
     }
   }
@@ -62,11 +74,25 @@
     flex-flow: row wrap;
     margin-bottom: 80px;
   }
-
+  .gallery .plms{
+    width: 100vw;
+    height:50px;
+    line-height: 50px;
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+  .gallery .plms a{
+    float: right;
+    margin-right: 20px;
+  }
   .gallery .item {
     flex: 1;
+  }.gallery .item div{
+     display: inline-block;
+   }
+  .img100{
+    width:100vw!important;
   }
-
   .gallery .item img {
     width: 33vw;
     height: auto;

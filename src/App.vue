@@ -6,23 +6,27 @@
       <router-view v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
     <router-view v-if="!$route.meta.keepAlive"></router-view>
-    <m-tabbar v-model="select">
+
+
+
+
+    <m-tabbar v-model="select" v-if="$store.state.showBottomNav">
       <m-tabbar-item id='Index' isRouter>
         <img src="./assets/images/ic_tab_home_normal.png" alt="" slot="icon-normal">
         <img src="./assets/images/ic_tab_home_active.png" alt="" slot="icon-active">
         首页
       </m-tabbar-item>
-      <m-tabbar-item id='AudioBook' isRouter>
+      <m-tabbar-item id='AudioBook' isRouter :showDot="videoDot">
         <img src="./assets/images/ic_tab_subject_normal.png" alt="" slot="icon-normal">
         <img src="./assets/images/ic_tab_subject_active.png" alt="" slot="icon-active">
         视频
       </m-tabbar-item>
-      <m-tabbar-item id='Broadcast' isRouter>
+      <m-tabbar-item id='Broadcast' isRouter >
         <img src="./assets/images/ic_tab_status_normal.png" alt="" slot="icon-normal" class="uppic">
         <img src="./assets/images/ic_tab_status_active.png" alt="" slot="icon-active" class="uppic">
         上传
       </m-tabbar-item>
-       <m-tabbar-item id='Mine' isRouter>
+       <m-tabbar-item id='Mine' isRouter :showDot = "mineDot">
         <img src="./assets/images/ic_tab_profile_normal.png" alt="" slot="icon-normal">
         <img src="./assets/images/ic_tab_profile_active.png" alt="" slot="icon-active">
         我的
@@ -34,6 +38,8 @@
 <script>
 import mTabbar from './components/tabbar'
 import mTabbarItem from './components/tabbar-item'
+
+import { Tabbar, TabbarItem } from 'vux'
 export default {
   name: 'app',
   components:{
@@ -42,14 +48,32 @@ export default {
   },
   data() {
       return {
-        select:"Index"
+        select:"Index",
+        // showTab:true,
       }
     },
+  created(){
+    console.log("create======="+this.$store.state.hasMessagemine)
+  },
   watch:{
     $route(){
       console.log('改变路由',this.$route.path)
+      // if(this.$route.path == "/login"){
+      //   this.showTab = false;
+      // }else{
+      //   this.showTab = true;
+      // }
+    },
+
+  },
+  computed: {
+    videoDot(){
+      return this.$store.state.hasMessagevideo;
+    },
+    mineDot(){
+      return this.$store.state.hasMessagemine;
     }
-  }
+  },
 }
 </script>
 

@@ -16,6 +16,13 @@ import 'vue-photo-preview/dist/skin.css'
 import VideoPlayer from 'vue-video-player'
 require('video.js/dist/video-js.css')
 require('vue-video-player/src/custom-theme.css')
+
+
+
+// axios.defaults.baseURL = 'http://60.205.57.44:8081';
+// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
 Vue.use(VideoPlayer)
 
 Vue.use(preview)
@@ -24,6 +31,17 @@ Vue.use(uploader,store)
 Vue.use(VueAxios, axios)
 Vue.use(Loading);
 /* eslint-disable no-new */
+
+
+
+
+
+
+
+
+
+
+
 new Vue({
   el: '#app',
   router,

@@ -1,5 +1,6 @@
 <template>
     <a class="m-tabbar-item" :class="{'is-active':isActive}" @click="goToRouter">
+        <div class="tabdot" v-if="showDot"></div>
         <span class="m-tabbar-item-icon" v-show="!isActive"><slot name="icon-normal"></slot></span>
         <span class="m-tabbar-item-icon" v-show="isActive"><slot name="icon-active"></slot></span>
         <span class="m-tabbar-item-text"><slot></slot></span>
@@ -31,17 +32,31 @@
         	isRouter:{
         		type:Boolean,
         		default:false
-        	}
+        	},
+          showDot:{
+        	  type:Boolean,
+            default: false
+          }
         },
+        // data(){
+        //      return {
+        //        showdots:false
+        //      }
+        // },
         computed: {
            isActive(){
                if(this.$parent.value1===this.id){
                    return true;
                }
-           }
+           },
+          // showDot(){
+          //    return this.showDot
+          // }
         },
         methods:{
         	goToRouter(){
+        	  console.log(this.showDot)
+            this.$store.dispatch('hadSee',this.id)
         		this.$parent.$emit('input',this.id)
         		if(this.isRouter){
         			this.$router.push(this.id)
@@ -53,6 +68,7 @@
 <style lang="less">
 @import "../assets/less/var.less";
 .m-tabbar-item{
+  position: relative;
     flex: 1;
     text-align: center;
     .m-tabbar-item-icon{
@@ -74,5 +90,14 @@
             color: @tabbarActiveColor;
         }
     }
+  .tabdot{
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: red;
+    position: absolute;
+    top:0px;
+    right: 45px;
+  }
 }
 </style>
