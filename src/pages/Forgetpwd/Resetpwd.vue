@@ -1,24 +1,25 @@
+
 <template>
   <div>
     <div class="dl">找回密码</div>
-    <div class="title">获取验证码</div>
+    <div class="title">输入新密码</div>
 
     <div class="title_box">
       <div class="title_left"></div>
-      <x-input type="text" v-model="username" placeholder="请输入手机号"></x-input>
+      <x-input type="password" v-model="username" placeholder="请输入新密码"></x-input>
       <div class="title_right"></div>
     </div>
 
     <div class="title_box">
       <div class="title_left"></div>
-      <x-input type="password" v-model="pwd" placeholder="请输入验证码"></x-input>
-      <div class="wjmm">获取验证码</div>
+      <x-input type="password" v-model="pwd" placeholder="再次输入密码"></x-input>
+      <!--<div class="wjmm">获取验证码</div>-->
       <div class="title_right"></div>
     </div>
 
     <div class="title_box">
       <div class="title_left"></div>
-      <div class="submitlogin" @click="nextpass()">下一步</div>
+      <div class="submitlogin">提交</div>
       <div class="title_right"></div>
     </div>
   </div>
@@ -36,18 +37,13 @@
         pwd:''
       }
     },
-    name: "Forgetpwd",
+    name: "Resetpwd",
     beforeCreate() {
       this.$store.state.showBottomNav = false //控制导航栏消失与隐藏
     },
     // destroyed(){
     //   this.$store.state.showBottomNav = true
     // }
-    methods:{
-      nextpass(){
-        this.$router.push('/login/resetpwd')
-      }
-    }
   }
 </script>
 
