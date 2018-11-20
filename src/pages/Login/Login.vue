@@ -5,7 +5,7 @@
 
       <div class="title_box">
         <div class="title_left"></div>
-        <x-input type="text" v-model="username" placeholder="请输入用户名/手机号"></x-input>
+        <x-input type="text" v-model="username" placeholder="手机、邮箱、账号"></x-input>
         <div class="title_right"></div>
       </div>
 

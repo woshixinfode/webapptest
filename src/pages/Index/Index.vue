@@ -1,66 +1,47 @@
 <template>
   <div>
     <header class="m-header is-fixed is-bg top-search">
-      <div @click="showSide" >侧边</div>
+      <div @click="showSide" class="showside" ></div>
       <div class="search-wrap">
-        todo
-      </div>
-      <div class="m-header-button is-right" style="text-align: center;width: 50px;">
-        <a href="javascript:;"><img class="m-icon-img" src="../../assets/images/ic_chat_white.png" /></a>
+        <div class="searchicon"></div>
+        <x-input type="text" v-model="searchtext" placeholder="输入你想要搜索的内容"></x-input>
       </div>
     </header>
     <div class="page-content">
-
-      <!--<m-swipe swipeid="swipe01" :autoplay="1000" paginationDirection="right">-->
-        <!--<div class="swiper-slide " slot="swiper-con"><img src="../../assets/images/banner/01.jpg" alt=""></div>-->
-        <!--<div class="swiper-slide " slot="swiper-con"><img src="../../assets/images/banner/02.jpg" alt=""></div>-->
-        <!--<div class="swiper-slide " slot="swiper-con"><img src="../../assets/images/banner/03.jpg" alt=""></div>-->
-      <!--</m-swipe>-->
-
-      <!--<m-cell title="提醒" icon>-->
-        <!--<img src="../../assets/images/ic_mine_notification.png" slot="icon">-->
-        <!--<a href="javascript:;" slot="cell-right"><img src="../../assets/images/ic_arrow_gray_small.png" alt=""></a>-->
-      <!--</m-cell>-->
-      <!--<m-cell title="设置">-->
-        <!--<a href="javascript:;" slot="cell-right"><img src="../../assets/images/ic_arrow_gray_small.png" alt=""></a>-->
-      <!--</m-cell>-->
-      <!--热门-->
-      <!--<div class="hot-wrap">-->
-        <!--<m-cell title="热门" label="hot">-->
-          <!--&lt;!&ndash;<a href="javascript:;" slot="cell-right">更多<img src="../../assets/images/ic_arrow_gray_small.png" alt=""></a>&ndash;&gt;-->
-        <!--</m-cell>-->
-        <!--<m-cell-media :author="item.target.author.name" :column="item.source_cn" :img="item.target.cover_url" v-for="(item,index) in hotData"-->
-          <!--:key="item.id">-->
-
-          <!--<span slot="title">{{item.title}}</span>-->
-          <!--<span slot="describe">{{item.target.desc}}</span>-->
-        <!--</m-cell-media>-->
-      <!--</div>-->
-      <photolist :itemlist="piclist"></photolist>
+      <!--<photolist :itemlist="piclist"></photolist>-->
+      <!--<List :itemlist="piclist"></List>-->
+      <Listview :itemlist="piclist"></Listview>
     </div>
     <side-bar></side-bar>
   </div>
 </template>
 
 <script>
+  import { XInput } from 'vux'
   import mHeader from '../../components/header'
   import mSwipe from '../../components/swipe'
   import mCell from '../../components/cell'
   import mCellMedia from '../../components/cell-media'
   import SideBar from '../SideBar/Sidebar'
   import photolist from '../PhotoList/PhotoList'
+  import List from '../PhotoList/List'
+  import Listview from '../PhotoList/Listview'
   export default {
     name: 'index',
     components: {
+      XInput,
       mHeader,
       mSwipe,
       mCell,
       mCellMedia,
       SideBar,
-      photolist
+      photolist,
+      List,
+      Listview
     },
     data() {
       return {
+        searchtext:'',
         recommendData: [],
         hotData: [],
         piclist:[{
@@ -187,9 +168,32 @@
 
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+  .searchicon{
+    float:left;
+    height: 25px;
+    width: 25px;
+    background:url("../../assets/images/newpic/icon_search.png");
+    background-size: cover;
+    margin-left: 15px;
+  }
+  .showside{
+    width: 50px;
+    height: 50px;
+    margin-left: 16px;
+    background:url("../../assets/images/newpic/icon_showside.png");
+    background-size: cover;
+  }
+  /*覆盖原有css*/
+  .weui-cell:before{
+    border:none!important;
+  }
+  .weui-cell{
+    width:100%;
+    border:none;
+  }
   header.m-header {
-    padding: 0 0 0 10px;
+    padding: 20px 0 20px 10px;
   }
 
   .is-fixed~.page-content {
@@ -200,14 +204,15 @@
   .top-search {
     .search-wrap {
       width: 100%;
-      height: 30px;
-      background: #fff;
-      border-radius: 4px;
+      height: 70px;
+      background:#F1F1F2;
+      border-radius: 36px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       color: #c0c0c0;
       padding: 0 12px;
+      margin:0 36px 0 18px;
       .placeholder {
         flex: 1;
         text-align: left;

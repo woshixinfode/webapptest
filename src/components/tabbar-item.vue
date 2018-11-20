@@ -73,17 +73,17 @@
     text-align: center;
     .m-tabbar-item-icon{
         display: block;
-        padding-top: 2px;
+        margin:10px auto;
         img{
-            width: 50px;
-            height: 50px;
+            width: auto;
+            height: 44px;
         }
 
     }
     .m-tabbar-item-text{
         display: block;
-        font-size: 30px;
-        color:#949494;
+        font-size: 20px;
+        color:#ccc;
     }
     &.is-active{
         .m-tabbar-item-text{

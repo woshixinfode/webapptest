@@ -9,6 +9,7 @@ import Loginview from '../pages/Loginview/Loginview'
 import Login from '../pages/Login/Login'
 import Forgetpwd from '../pages/Forgetpwd/Forgetpwd'
 import Resetpwd from '../pages/Forgetpwd/Resetpwd'
+import resetsuccess from '../pages/Forgetpwd/resetsuccess'
 Vue.use(Router)
 
 export default new Router({
@@ -16,7 +17,7 @@ export default new Router({
   routes: [
     {
       path: '/login',
-      name: 'Login',
+      // name: 'Login',
       component: Loginview,
       children:[
         {
@@ -33,6 +34,11 @@ export default new Router({
           path:'resetpwd',
           name:'Resetpwd',
           component:Resetpwd
+        },
+        {
+          path:'resetsuccess',
+          name:'resetsuccess',
+          component:resetsuccess
         }
       ]
     },

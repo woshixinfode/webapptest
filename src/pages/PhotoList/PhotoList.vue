@@ -2,12 +2,14 @@
   <div class="gallery">
     <div class="plms"><a @click="hxpl()">横向排列</a><a @click="sxpl()">竖向排列</a></div>
     <div class="item">
-      <div v-for="(item, index) in itemlist">
-        <img v-if="item.type == 'pic'" class="previewer-demo-img" :class= "isHundred?'img100':''"
-              :src="item.src" width="100" preview="repairDetail" :preview-text='item.preview_text'>
-          <div v-if="item.type == 'array'">
-            <img  :src="item.src" :class= "isHundred?'img100':''" width="100" alt="">
-          </div>
+      <div v-for="(item, index) in itemlist" :class="isHundred?'img100':''">
+        <div v-if="item.type == 'pic'" style="width:auto;padding:0;">
+          <img class="previewer-demo-img"
+               :src="item.src" width="100" preview="repairDetail" :preview-text='item.preview_text'>
+        </div>
+        <div v-if="item.type == 'array'"  style="width:auto;padding:0;">
+          <img :src="item.src"  width="100" alt="">
+        </div>
       </div>
     </div>
   </div>
@@ -15,12 +17,11 @@
 
 <script>
   import {Previewer, TransferDom} from 'vux'
-
   export default {
     name: "PhotoList",
     props: ['itemlist'],
     directives: {
-      TransferDom
+      TransferDom,
     },
     components: {
       // Previewer
@@ -35,10 +36,10 @@
       // hdp(){
       //
       // }
-      sxpl(){
+      sxpl() {
         this.isHundred = true
       },
-      hxpl(){
+      hxpl() {
         this.isHundred = false
       }
     },
@@ -46,22 +47,7 @@
       return {
         // itemlist:this.props.item,
         list: [],
-        isHundred:false,
-        //options: {
-          // getThumbBoundsFn(index) {
-          //   // find thumbnail element
-          //   let thumbnail = document.querySelectorAll('.previewer-demo-img')[index]
-          //   // get window scroll Y
-          //   let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
-          //   // optionally get horizontal scroll
-          //   // get position of element relative to viewport
-          //   let rect = thumbnail.getBoundingClientRect()
-          //   // w = width
-          //   return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
-          //   // Good guide on how to get element coordinates:
-          //   // http://javascript.info/tutorial/coordinates
-          // }
-       // }
+        isHundred: false,
       }
     }
   }
@@ -74,28 +60,48 @@
     flex-flow: row wrap;
     margin-bottom: 80px;
   }
-  .gallery .plms{
+
+  .gallery .plms {
     width: 100vw;
-    height:50px;
+    height: 50px;
     line-height: 50px;
     font-size: 30px;
     margin-bottom: 10px;
   }
-  .gallery .plms a{
+
+  .gallery .plms a {
     float: right;
     margin-right: 20px;
   }
+
   .gallery .item {
-    flex: 1;
-  }.gallery .item div{
-     display: inline-block;
-   }
-  .img100{
-    width:100vw!important;
+    /*flex: 1;*/
+    display: flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
   }
+
+  .gallery .item div {
+    /*display: inline-block;*/
+  }
+
+  .img100 {
+    width: 100vw !important;
+  }
+
+  .gallery .item div {
+    width: 50%;
+    height: 280px;
+    padding: 16px 16px 0 16px;
+    /*float: left;*/
+    overflow: hidden;
+  }
+
   .gallery .item img {
-    width: 33vw;
-    height: auto;
+    /*width: 100%;*/
+    /*height:100%;*/
+    /*height: 280px;*/
+    /*width:100%;*/
   }
 
   .gallery.preview .item {
@@ -117,7 +123,8 @@
     -moz-transition: all .3s linear;
     transition: all .3s linear;
   }
-  .pswp__caption__center{
-    width:100%!important;
+
+  .pswp__caption__center {
+    width: 100% !important;
   }
 </style>

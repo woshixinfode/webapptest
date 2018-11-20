@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="close_page" @click="cancel_reset()"></div>
     <div class="dl">找回密码</div>
     <div class="title">获取验证码</div>
 
@@ -40,12 +41,12 @@
     beforeCreate() {
       this.$store.state.showBottomNav = false //控制导航栏消失与隐藏
     },
-    // destroyed(){
-    //   this.$store.state.showBottomNav = true
-    // }
     methods:{
       nextpass(){
         this.$router.push('/login/resetpwd')
+      },
+      cancel_reset(){
+        this.$router.push('/login');
       }
     }
   }
@@ -113,5 +114,14 @@
     font-size: 28px!important;
     height: 80px!important;
     line-height: 80px!important;
+  }
+  .close_page{
+    height: 28px;
+    width: 28px;
+    position: absolute;
+    top:18px;
+    right:18px;
+    background: url("../../assets/images/newpic/icon_x.png") no-repeat;
+    background-size: cover;
   }
 </style>

@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    <div class="close_page" @click="cancel_reset()"></div>
     <div class="dl">找回密码</div>
     <div class="title">输入新密码</div>
 
@@ -19,7 +20,7 @@
 
     <div class="title_box">
       <div class="title_left"></div>
-      <div class="submitlogin">提交</div>
+      <div class="submitlogin" @click="resetpwd()">提交</div>
       <div class="title_right"></div>
     </div>
   </div>
@@ -44,6 +45,15 @@
     // destroyed(){
     //   this.$store.state.showBottomNav = true
     // }
+    methods:{
+      cancel_reset(){
+        this.$router.push('/login');
+      },
+      resetpwd(){
+        this.$router.push('/login/resetsuccess');
+      }
+    }
+
   }
 </script>
 
@@ -109,5 +119,14 @@
     font-size: 28px!important;
     height: 80px!important;
     line-height: 80px!important;
+  }
+  .close_page{
+    height: 28px;
+    width: 28px;
+    position: absolute;
+    top:18px;
+    right:18px;
+    background: url("../../assets/images/newpic/icon_x.png") no-repeat;
+    background-size: cover;
   }
 </style>
