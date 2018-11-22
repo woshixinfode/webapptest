@@ -7,7 +7,7 @@
     </div>
     <div class="waterfall" :class="isHundred?'img100':''">
       <div class="item" v-for="(item, index) in itemlist">
-        <div v-if="item.type == 'pic'" class="item-content">
+        <div v-if="item.type == 'pic'" class="item-content" @click="gotoInfo(1)">
           <img class="previewer-demo-img"
                :src="item.src" width="100" preview="repairDetail"
                :preview-text='item.preview_text'>
@@ -41,6 +41,14 @@
         this.isHundred = true
         console.log("竖向");
         this.idx = 2
+      },
+      gotoInfo(id){
+        this.$router.push({
+          name: 'PhotoListinfo',
+          params: {
+            id: id
+          }
+        })
       }
     }
   }

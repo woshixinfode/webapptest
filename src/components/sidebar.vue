@@ -62,7 +62,7 @@
   .side-content {
     z-index: 11;
     position: fixed;
-    width: 286px;
+    width: 150px;
     height: 100%;
     background: #e5e5e5;
     top: 0;

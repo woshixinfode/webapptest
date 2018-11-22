@@ -45,6 +45,7 @@
         // },
         computed: {
            isActive(){
+             console.log(this.$parent.value1)
                if(this.$parent.value1===this.id){
                    return true;
                }
@@ -55,7 +56,7 @@
         },
         methods:{
         	goToRouter(){
-        	  console.log(this.showDot)
+        	  // console.log(this.showDot)
             this.$store.dispatch('hadSee',this.id)
         		this.$parent.$emit('input',this.id)
         		if(this.isRouter){
@@ -73,16 +74,16 @@
     text-align: center;
     .m-tabbar-item-icon{
         display: block;
-        margin:10px auto;
+        margin:10px auto 5px;
         img{
             width: auto;
-            height: 44px;
+            height: 20px;
         }
 
     }
     .m-tabbar-item-text{
         display: block;
-        font-size: 20px;
+        font-size: 10px;
         color:#ccc;
     }
     &.is-active{

@@ -56,46 +56,47 @@
 
 <style lang="less" scoped>
   @fontcolor:#000;
-  @ma_left:60px;
+  @ma_left:30px;
   .dl{
-    font-size: 28px;
+    font-size: 14px;
     color:@fontcolor;
     text-align: left;
     margin-left:@ma_left;
-    margin-top:176px;
+    margin-top:88px;
   }
   .title{
     text-align: left;
-    font-size: 52px;
+    font-size: 26px;
     text-align: left;
     margin-left:@ma_left;
-    margin-top: 100px;
+    margin-top: 56px;
   }
   .title_box{
     width: 100%;
     overflow: hidden;
     display: flex;
-    margin-top: 88px;
+    margin-top: 40px;
     position:relative;
-    font-size: 28px;
+    font-size: 14px;
 
   }
-  .title_left{width: 60px;height: 82px;float: left;}
-  .title_right{width: 60px;height: 82px;float: right;}
-  .title_right_f{width: 120px;height: 82px;float: right;} /*忘记密码的样式处理*/
-  .title_box input{width: 100%;height: 80px;border: none;outline: none;font-size: 28px;}
+  .title_left{width: 30px;height: 41px;float: left;}
+  .title_right{width: 30px;height: 41px;float: right;}
+  .title_right_f{width: 60px;height: 41px;float: right;} /*忘记密码的样式处理*/
+  .title_box input{width: 100%;height: 40px;border: none;outline: none;font-size: 14px;}
   .wjmm{
     position:absolute;
-    right:110px;
-    top:25px;
+    right:55px;
+    top:15px;
+    color:#999;
   }
   .submitlogin{
-    height:88px;
+    height:44px;
     width: 100%;
-    font-size:32px;
+    font-size:16px;
     background-color: #0079FE;
     text-align: center;
-    line-height:88px;
+    line-height:44px;
     color:#fff;
   }
   /*覆盖原有css*/

@@ -29,7 +29,7 @@
     right: 0;
     width: 100%;
     /*overflow: hidden; */
-    height: 100px;
+    height: 75px;
     background: #fff;
     &:before {
       content: '';

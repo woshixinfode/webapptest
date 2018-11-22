@@ -26,26 +26,26 @@
     width: 100%;
     overflow: hidden;
     display: flex;
-    margin-top: 188px;
+    margin-top: 94px;
     position:relative;
-    font-size: 28px;
+    font-size: 14px;
 
   }
-  .title_left{width: 60px;height: 82px;float: left;}
-  .title_right{width: 60px;height: 82px;float: right;}
+  .title_left{width: 30px;height: 41px;float: left;}
+  .title_right{width: 30px;height: 41px;float: right;}
   .submitlogin{
-    height:88px;
+    height:44px;
     width: 100%;
-    font-size:32px;
+    font-size:16px;
     background-color: #0079FE;
     text-align: center;
-    line-height:88px;
+    line-height:44px;
     color:#fff;
   }
   .title{
-    font-size: 40px;
+    font-size: 20px;
     color:#000;
     text-align: center;
-    margin-top: 342px;
+    margin-top: 171px;
   }
 </style>

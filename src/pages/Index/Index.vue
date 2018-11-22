@@ -171,18 +171,18 @@
 <style lang="less" scoped>
   .searchicon{
     float:left;
-    height: 25px;
-    width: 25px;
+    height: 17px;
+    width: 17px;
     background:url("../../assets/images/newpic/icon_search.png");
     background-size: cover;
-    margin-left: 15px;
+    /*margin-left: 11px;*/
   }
   .showside{
-    width: 50px;
-    height: 50px;
-    margin-left: 16px;
-    background:url("../../assets/images/newpic/icon_showside.png");
-    background-size: cover;
+    width: 28px;
+    height: 28px;
+    /*margin-left: 16px;*/
+    background:url("../../assets/images/newpic/icon_showside.png") no-repeat center center;
+    background-size:20px 18px;
   }
   /*覆盖原有css*/
   .weui-cell:before{
@@ -193,18 +193,18 @@
     border:none;
   }
   header.m-header {
-    padding: 20px 0 20px 10px;
+    padding: 25px 0 25px 10px;
   }
 
   .is-fixed~.page-content {
-    padding-top: 100px;
-    padding-bottom: 50px;
+    padding-top: 70px;
+    /*padding-bottom: 50px;*/
   }
 
   .top-search {
     .search-wrap {
       width: 100%;
-      height: 70px;
+      height: 36px;
       background:#F1F1F2;
       border-radius: 36px;
       display: flex;
@@ -212,7 +212,7 @@
       justify-content: space-between;
       color: #c0c0c0;
       padding: 0 12px;
-      margin:0 36px 0 18px;
+      margin:0 16px 0 18px;
       .placeholder {
         flex: 1;
         text-align: left;

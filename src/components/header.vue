@@ -50,7 +50,7 @@
   .m-header {
     display: flex;
     align-items: center;
-    height: 100px;
+    /*height: 100px;*/
     padding: 0 10px;
     background: #fff;
     color: @headerDefaultColor;

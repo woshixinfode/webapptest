@@ -5,47 +5,36 @@ import Broadcast from '../pages/Broadcast/Broadcast'
 import AudioBook from '../pages/AudioBook/AudioBook'
 import Group from '../pages/Group/Group'
 import Mine from '../pages/Mine/Mine'
-import Loginview from '../pages/Loginview/Loginview'
+import LoginView from '../pages/Loginview/Loginview'
 import Login from '../pages/Login/Login'
-import Forgetpwd from '../pages/Forgetpwd/Forgetpwd'
-import Resetpwd from '../pages/Forgetpwd/Resetpwd'
-import resetsuccess from '../pages/Forgetpwd/resetsuccess'
+import ForgetPwd from '../pages/Forgetpwd/Forgetpwd'
+import ResetPwd from '../pages/Forgetpwd/Resetpwd'
+import ResetSuccess from '../pages/Forgetpwd/resetsuccess'
+import IndexView from '../pages/Index/Indexview'
+import PhotoListinfo from '../pages/Index/Photolistinfo'
 Vue.use(Router)
 
 export default new Router({
-  mode:'history',
+  mode:'hash',
+  base: __dirname,
   routes: [
-    {
-      path: '/login',
-      // name: 'Login',
-      component: Loginview,
-      children:[
-        {
-          path:'/',
-          name:'loginPage',
-          component:Login
-        },
-        {
-          path:'forgetpwd',
-          name:'forgetPwd',
-          component:Forgetpwd
-        },
-        {
-          path:'resetpwd',
-          name:'Resetpwd',
-          component:Resetpwd
-        },
-        {
-          path:'resetsuccess',
-          name:'resetsuccess',
-          component:resetsuccess
-        }
-      ]
-    },
+
     {
       path: '/',
-      name: 'Index',
-      component: Index,
+      component: IndexView,
+      name:'Index',
+      children: [
+        {
+          path:'/',
+          // name:'Index1',
+          component:Index
+        },
+        {
+          path:'/photolistinfo',
+          name:'info',
+          component:PhotoListinfo
+        }
+      ]
     },
     {
       path: '/broadcast',
@@ -74,9 +63,36 @@ export default new Router({
       path: '/Index',
       redirect: '/'
     },
-    // {
-    //   path: '*',
-    //   redirect: '/'
-    // },
+    {
+      path: '/login',
+      component: LoginView,
+      name:'login',
+      children:[
+        {
+          path:'/',
+          name:'loginPage',
+          component:Login
+        },
+        {
+          path:'forgetpwd',
+          name:'forgetPwd',
+          component:ForgetPwd
+        },
+        {
+          path:'resetpwd',
+          name:'ResetPwd',
+          component:ResetPwd
+        },
+        {
+          path:'ResetSuccess',
+          name:'ResetSuccess',
+          component:ResetSuccess
+        }
+      ]
+    },
+    {
+      path: '*',
+      redirect: '/'
+    },
   ]
 })
