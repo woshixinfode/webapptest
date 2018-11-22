@@ -23,7 +23,7 @@
   import mHeader from '../../components/header'
   import { mapState } from 'vuex'
   export default {
-    name: 'index',
+    name: 'Upload',
     data () {
       return {
         imgs: []

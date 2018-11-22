@@ -21,7 +21,7 @@
         <img src="./assets/images/newpic/icon_videoon.png" alt="" slot="icon-active">
         视频
       </m-tabbar-item>
-      <m-tabbar-item id='Broadcast' isRouter >
+      <m-tabbar-item id='Upload' isRouter >
         <img src="./assets/images/newpic/icon_upload.png" alt="" slot="icon-normal" class="uppic">
         <img src="./assets/images/newpic/icon_uploadon.png" alt="" slot="icon-active" class="uppic">
         上传

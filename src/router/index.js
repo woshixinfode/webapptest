@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '../pages/Index/Index'
-import Broadcast from '../pages/Broadcast/Broadcast'
+import Upload from '../pages/Broadcast/Broadcast'
 import AudioBook from '../pages/AudioBook/AudioBook'
 import Group from '../pages/Group/Group'
 import Mine from '../pages/Mine/Mine'
@@ -12,6 +12,10 @@ import ResetPwd from '../pages/Forgetpwd/Resetpwd'
 import ResetSuccess from '../pages/Forgetpwd/resetsuccess'
 import IndexView from '../pages/Index/Indexview'
 import PhotoListinfo from '../pages/Index/Photolistinfo'
+
+/*上传部分*/
+import Chooseupload from '../pages/Upload/Chooseupload'
+import Uploaddemo from '../pages/Broadcast/Uploaddemo'
 Vue.use(Router)
 
 export default new Router({
@@ -37,12 +41,12 @@ export default new Router({
       ]
     },
     {
-      path: '/broadcast',
-      name: 'Broadcast',
-      component: Broadcast,
-      meta:{
-        keepAlive:true
-      }
+      path: '/upload',
+      name: 'upload',
+      component: Uploaddemo,
+      // meta:{
+      //   keepAlive:true
+      // }
     },
     {
       path: '/audioBook',

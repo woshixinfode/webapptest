@@ -135,6 +135,9 @@
       created(){
           console.log(this.$route.params.id)
       },
+      beforeCreate() {
+        this.$store.state.showBottomNav = true //控制导航栏消失与隐藏
+      },
       methods:{
         goback(){
           this.$router.go(-1)
