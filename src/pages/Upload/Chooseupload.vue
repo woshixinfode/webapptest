@@ -1,15 +1,15 @@
 <template>
     <div>
       <div class="choosetype">
-        <div>
+        <div @click="uploadone()">
           <img src="../../assets/images/newpic/icon_photo.png" alt="">
           上传图片
         </div>
-        <div>
+        <div @click="uploadlist()">
           <img src="../../assets/images/newpic/icon_photolist.png" alt="">
           上传组图
         </div>
-        <div>
+        <div @click="uploadvideo()">
           <img src="../../assets/images/newpic/icon_video_.png" alt="">
           上传视频
         </div>
@@ -29,6 +29,27 @@
       methods:{
         closepage(){
           this.$router.go(-1);
+        },
+        uploadone(){
+          this.$router.push({
+            name: 'uploadinfo',
+            params: {
+              limit: 1
+            }
+          })
+        },
+        uploadlist(){
+          this.$router.push({
+            name: 'uploadinfo',
+            params: {
+              limit: undefined
+            }
+          })
+        },
+        uploadvideo(){
+          this.$router.push({
+            name: 'uploadinfo'
+          })
         }
       }
     }

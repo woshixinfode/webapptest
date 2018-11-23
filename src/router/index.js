@@ -43,10 +43,15 @@ export default new Router({
     {
       path: '/upload',
       name: 'upload',
-      component: Uploaddemo,
+      component: Chooseupload,
       // meta:{
       //   keepAlive:true
       // }
+    },
+    {
+      path:'/uploadinfo',
+      name:'uploadinfo',
+      component:Uploaddemo
     },
     {
       path: '/audioBook',

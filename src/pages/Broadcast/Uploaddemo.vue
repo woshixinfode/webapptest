@@ -10,7 +10,7 @@
     <div class="upload">
       <input @change="fileChange($event)" type="file" id="upload_file" multiple style="display: none"/>
       <div class="upload_warp_img">
-        <div class="upload_warp_img_div" v-for="(item,index) in imgList" :key="index">
+        <div class="upload_warp_img_div" v-for="(item,index) in imgListpost" :key="index">
           <div class="upload_warp_img_div_top">
             <div class="upload_warp_img_div_text">
               {{item.file.name}}
@@ -39,10 +39,11 @@
         <div>大海</div>
         <div>人物</div>
         <div>可爱</div>
+        <div>这里是占位</div>
       </div>
       <!--<group>-->
-        <popup-picker title="选择分类" :data="list1" v-model="value1"  placeholder="请选择"></popup-picker>
-        <popup-picker title="授权相关" :data="list1" v-model="value1"  placeholder="请选择"></popup-picker>
+        <popup-picker title="选择分类" :data="kindslist" v-model="kindsvalue"  placeholder="请选择"></popup-picker>
+        <popup-picker title="授权相关" :data="authlist" v-model="authvalue"  placeholder="请选择"></popup-picker>
       <!--</group>-->
     </div>
     <div class="fg"></div>
@@ -65,15 +66,47 @@
     data() {
       return {
         imgList: [],
+        imgListpost:[],
         size: 0,
         limit:undefined,
 
-        value1:[],
-        value2:[],
-        list1: [['小米', 'iPhone', '华为', '情怀', '三星', '其他', '不告诉你']],
+        kindsvalue:[],
+        authvalue:[],
+        kindslist: [['未分类', '抽象', '旅行', '生活', '商业', '美食', '夜景','胶片','水下']],
+        authlist:[['独家代理','非独家代理','自有版权']]
       }
     },
+    watch:{
+      imgList(array){
+        console.log("watch_val")
+        console.log(array)
+        var temp = [];
+        var index = [];
+        var l = array.length;
+        for(var i = 0; i < l; i++) {
+          for(var j = i + 1; j < l; j++){
+            if (array[i].file.name === array[j].file.name){
+              i++;
+              j = i;
+            }
+          }
+          temp.push(array[i]);
+          index.push(i);
+        }
+        console.log(index);
+        console.log(temp)
+       this.imgListpost = temp;
+      }
+    },
+    created(){
+      console.log(this.$route.params.limit)
+      this.$store.state.showBottomNav = false //控制导航栏消失与隐藏
+      this.limit = this.$route.params.limit;
+    },
     methods: {
+      goback(){
+        this.$router.go(-1)
+      },
       //设置
       limitClick(state) {
         this.imgList = [];
@@ -86,11 +119,14 @@
         document.getElementById('upload_file').click()
       },
       fileChange(el) {
+        console.log("imglist");
+        console.log(this.imgList)
         if (!el.target.files[0].size) return;
         this.fileList(el.target);
         el.target.value = ''
       },
       fileList(fileList) {
+
         let files = fileList.files;
         for (let i = 0; i < files.length; i++) {
           //判断是否为文件夹
@@ -126,7 +162,6 @@
         })
       },
       fileAdd(file) {
-        console.log(file)
         if (this.limit !== undefined) this.limit--;
         if (this.limit !== undefined && this.limit < 0) return;
         //总大小
@@ -152,38 +187,18 @@
               _this.imgList.push({
                 file
               });
-              // console.log( _this.imgList);
+
             };
             image.src= file.src;
           }
         }
-
-        console.log(this.imgList)
+        console.log("imglist");
+        console.log(this.imgList);
       },
       fileDel(index) {
         this.size = this.size - this.imgList[index].file.size;//总大小
         this.imgList.splice(index, 1);
         if (this.limit !== undefined) this.limit = this.imgList.length;
-      },
-      bytesToSize(bytes) {
-        if (bytes === 0) return '0 B';
-        let k = 1000, // or 1024
-          sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-          i = Math.floor(Math.log(bytes) / Math.log(k));
-        return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
-      },
-      dragenter(el) {
-        el.stopPropagation();
-        el.preventDefault();
-      },
-      dragover(el) {
-        el.stopPropagation();
-        el.preventDefault();
-      },
-      drop(el) {
-        el.stopPropagation();
-        el.preventDefault();
-        this.fileList(el.dataTransfer);
       }
     }
   }

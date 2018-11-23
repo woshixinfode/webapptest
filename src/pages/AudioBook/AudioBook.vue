@@ -1,8 +1,8 @@
 <template>
   <div>
-  	<m-header title="书影音" fixed>
-  			<a href="javascript:;" slot="right"><img class="m-icon-img margin-right-10" src="../../assets/images/ic_actionbar_search_icon.png"/></a>
-  			<a href="javascript:;" slot="right"><img class="m-icon-img" src="../../assets/images/ic_chat_green.png"/></a>
+  	<m-header title="视频" fixed>
+  			<!--<a href="javascript:;" slot="right"><img class="m-icon-img margin-right-10" src="../../assets/images/ic_actionbar_search_icon.png"/></a>-->
+  			<!--<a href="javascript:;" slot="right"><img class="m-icon-img" src="../../assets/images/ic_chat_green.png"/></a>-->
   	</m-header>
     <video-player  class="video-player vjs-custom-skin"
                    ref="videoPlayer"
@@ -65,6 +65,9 @@
         return this.$refs.videoPlayer.player
       }
     },
+    created(){
+      this.$store.state.showBottomNav = true //控制导航栏消失与隐藏
+    },
     methods: {
       // listen event
       onPlayerPlay(player) {
@@ -114,5 +117,8 @@
 
 
 <style lang="less">
+  .m-header-title{
+    font-size: 14px!important;
+  }
 .video-player{margin-top: 80px;}
 </style>

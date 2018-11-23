@@ -1,7 +1,7 @@
 <template>
   <div>
   	<m-header title="我的" >
-  			<a href="javascript:;" slot="right"><img class="m-icon-img margin-right-10" src="../../assets/images/ic_actionbar_search_icon.png"/></a>
+  			<!--<a href="javascript:;" slot="right"><img class="m-icon-img margin-right-10" src="../../assets/images/ic_actionbar_search_icon.png"/></a>-->
   			<!--<a href="javascript:;" slot="right"><img class="m-icon-img" src="../../assets/images/ic_chat_green.png"/></a>-->
   	</m-header>
     <div class="avatar">头像占位</div>
@@ -32,6 +32,9 @@
         tabitem:0
       }
     },
+    created(){
+      this.$store.state.showBottomNav = true //控制导航栏消失与隐藏
+    },
     components: {
       mHeader,
       Tab,
@@ -48,8 +51,8 @@
 
 
 <style lang="less">
-  .vux-tab-item{font-size: 30px!important;line-height: 80px!important;}
-  .vux-tab ,.vux-tab-container{height:80px!important; }
+  .vux-tab-item{font-size: 15px!important;line-height: 40px!important;}
+  .vux-tab ,.vux-tab-container{height:40px!important; }
   .tabitemDiv{margin-top:50px;
     div{
       text-align: center;
@@ -57,10 +60,10 @@
     }
   }
   .avatar{
-    width:100px;
-    height:100px;
-    border-radius: 50px;
+    width:50px;
+    height:50px;
+    border-radius: 25px;
     background-color: #42bd56;
-    margin:30px auto;
+    margin:15px auto;
   }
 </style>
