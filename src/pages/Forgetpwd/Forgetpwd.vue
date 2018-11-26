@@ -19,6 +19,15 @@
 
     <div class="title_box">
       <div class="title_left"></div>
+      <x-input type="password" v-model="pwd" placeholder="请输入图形验证码"></x-input>
+      <div class="wjmm_tx" @click="Refreshode()">
+        <img :src="imgcode" alt="">
+      </div>
+      <div class="title_right"></div>
+    </div>
+
+    <div class="title_box">
+      <div class="title_left"></div>
       <div class="submitlogin" @click="nextpass()">下一步</div>
       <div class="title_right"></div>
     </div>
@@ -26,6 +35,7 @@
 </template>
 
 <script>
+  import {getImgCode} from '../../services/api'
   import { XInput } from 'vux'
   export default {
     components: {
@@ -34,14 +44,29 @@
     data(){
       return {
         username:'',
-        pwd:''
+        pwd:'',
+        imgcode:'',
+        codeuuid:''
       }
     },
     name: "ForgetPwd",
     beforeCreate() {
       this.$store.state.showBottomNav = false //控制导航栏消失与隐藏
     },
+    mounted(){
+      this.getImgCode()
+    },
     methods:{
+      getImgCode(){
+        getImgCode().then(item=>{
+          console.log(item)
+          this.imgcode = item.captchaUrl
+          this.codeuuid = item.captchaUuid
+        })
+      },
+      Refreshode(){
+        this.getImgCode()
+      },
       nextpass(){
         this.$router.push('/login/resetpwd')
       },
@@ -92,6 +117,15 @@
     background-color: #0079FE;
     text-align: center;
     color:#fff;
+  }
+  .wjmm_tx{
+    position:absolute;
+    right:40px;
+    width: 80px;
+    height: 28px;
+    img{
+      width: 80px;
+    }
   }
   .submitlogin{
     height:44px;

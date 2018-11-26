@@ -21,34 +21,66 @@
         <div class="submitlogin" @click="loginapp">登陆</div>
         <div class="title_right"></div>
       </div>
+      <!--验证警告-->
+      <toast v-model="warn" type="warn">{{warningtext}}</toast>
     </div>
 </template>
 
 <script>
-  import { XInput } from 'vux'
+  import {login,getuserInfo} from '../../services/api'
+  import { XInput,Toast } from 'vux'
     export default {
       components: {
-        XInput
+        XInput,
+        Toast
       },
       data(){
         return {
           username:'',
-          pwd:''
+          pwd:'',
+          warn:false,
+          warningtext:""
         }
       },
         name: "Login",
       created() {
         this.$store.state.showBottomNav = false //控制导航栏消失与隐藏
       },
-      // destroyed(){
-      //   this.$store.state.showBottomNav = true
-      // },
       methods:{
+        warningalert(text){
+          this.warningtext = text
+          this.warn = true
+        },
         forgetpwd(){
           this.$router.push('login/forgetpwd')
         },
         loginapp(){
-          this.$router.push('/')
+          var that = this;
+          if(this.username == '' || this.pwd == ''){
+            this.warningalert("用户名或密码不能为空!")
+            return;
+          }else{
+            login({"user_name":this.username,"password":this.pwd}).then((item)=>{
+              console.log(item)
+              if(item.status_code == 0){
+                this.warningalert(item.message)
+                return;
+              }else{
+                localStorage.setItem("currentUser_token",item.data.token);//token写入localstorage
+                this.$store.commit('set_token', item.data.token);//token写入store
+                this.getUserInfo();
+                this.$router.push('/')
+              }
+            })
+          }
+        },
+        getUserInfo(){
+          getuserInfo().then(item=>{
+            console.log(item)
+            if(item.status_code == 1){
+              localStorage.setItem("customer_id",item.data.customer_id);
+            }
+          })
         }
       }
     }

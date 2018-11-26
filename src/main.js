@@ -17,12 +17,26 @@ import VideoPlayer from 'vue-video-player'
 require('video.js/dist/video-js.css')
 require('vue-video-player/src/custom-theme.css')
 
-
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    //这里判断用户是否登录，验证本地存储是否有token
+    if (!localStorage.currentUser_token) { // 判断当前的token是否存在
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // 确保一定要调用 next()
+  }
+})
 
 // axios.defaults.baseURL = 'http://60.205.57.44:8081';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
+// axios.defaults.headers.common['Authorization'] = store.state.token;
 Vue.use(VideoPlayer)
 
 Vue.use(preview)

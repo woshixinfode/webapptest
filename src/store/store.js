@@ -4,6 +4,7 @@ import {SHOW_LOADING,HIDE_LOADING} from './type';
 Vue.use(Vuex);
 
 const state={
+  token:'',
   showBottomNav:true,
 	loading:false,
   isShow:false,
@@ -45,7 +46,13 @@ const mutations={
   changevideoDot(state){
 	  console.log("hasMessagevideo = false")
 	  state.hasMessagevideo = false;
-  }
+  },
+
+  set_token(state, token) {
+    state.token = token
+    localStorage.setItem("currentUser_token",token);
+  },
+
 }
 
 const getters={

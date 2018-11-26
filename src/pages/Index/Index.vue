@@ -151,18 +151,12 @@
       this.$store.state.showBottomNav = true //控制导航栏消失与隐藏
     },
     created() {
-       this.fetchData();
+
     },
     methods: {
       showSide:function(){
         this.$store.dispatch('showSideBar')
       },
-      fetchData() {
-        this.axios.post('/api/authorizations',{'user_name':'damadmin','password':'12345678'}).then((response) => {
-          console.log(response);
-
-        })
-      }
     }
   }
 

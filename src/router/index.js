@@ -27,6 +27,7 @@ export default new Router({
       path: '/',
       component: IndexView,
       name:'Index',
+      meta: { requiresAuth: true },
       children: [
         {
           path:'/',
@@ -44,6 +45,7 @@ export default new Router({
       path: '/upload',
       name: 'upload',
       component: Chooseupload,
+      meta: { requiresAuth: true },
       // meta:{
       //   keepAlive:true
       // }
@@ -51,12 +53,14 @@ export default new Router({
     {
       path:'/uploadinfo',
       name:'uploadinfo',
-      component:Uploaddemo
+      component:Uploaddemo,
+      meta: { requiresAuth: true },
     },
     {
       path: '/audioBook',
       name: 'AudioBook',
-      component: AudioBook
+      component: AudioBook,
+      meta: { requiresAuth: true },
     },
     {
       path: '/group',
@@ -66,7 +70,8 @@ export default new Router({
     {
       path: '/mine',
       name: 'Mine',
-      component: Mine
+      component: Mine,
+      meta: { requiresAuth: true },
     },
     {
       path: '/Index',
