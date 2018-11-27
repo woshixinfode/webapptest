@@ -6,20 +6,20 @@
 
     <div class="title_box">
       <div class="title_left"></div>
-      <x-input type="text" v-model="username" placeholder="请输入手机号"></x-input>
+      <x-input type="text" v-model="phonenumber" placeholder="请输入手机号"></x-input>
       <div class="title_right"></div>
     </div>
 
     <div class="title_box">
       <div class="title_left"></div>
-      <x-input type="password" v-model="pwd" placeholder="请输入验证码"></x-input>
-      <div class="wjmm">获取验证码</div>
+      <x-input type="password" v-model="yzm" placeholder="请输入验证码" :show-clear='false'></x-input>
+      <div class="wjmm" :class="show?'':'wjmm_grey'" @click="time_sixty()">{{code_text}}</div>
       <div class="title_right"></div>
     </div>
 
     <div class="title_box">
       <div class="title_left"></div>
-      <x-input type="password" v-model="pwd" placeholder="请输入图形验证码"></x-input>
+      <x-input type="text" v-model="imgcodetext" placeholder="请输入图形验证码" :show-clear='false'></x-input>
       <div class="wjmm_tx" @click="Refreshode()">
         <img :src="imgcode" alt="">
       </div>
@@ -31,22 +31,36 @@
       <div class="submitlogin" @click="nextpass()">下一步</div>
       <div class="title_right"></div>
     </div>
+    <toast v-model="warn" type="warn">{{warningtext}}</toast>
+    <toast v-model="toastlalert" type="text">{{warningtext}}</toast>
   </div>
 </template>
 
 <script>
-  import {getImgCode} from '../../services/api'
-  import { XInput } from 'vux'
+  import {getImgCode,sendSmsCode} from '../../services/api'
+  import { XInput,Toast } from 'vux'
   export default {
     components: {
-      XInput
+      XInput,
+      Toast
     },
     data(){
       return {
-        username:'',
-        pwd:'',
+        phonenumber:'',
+        yzm:'',
         imgcode:'',
-        codeuuid:''
+        codeuuid:'',
+        imgcodetext:'',
+        warn:false,
+        toastlalert:false,
+        warningtext:'',
+        baseurl:'',//获取域名用来获取customer_id
+
+        //获取验证码的操作操作
+        show: true,
+        count: '',
+        timer: null,
+        code_text:"获取验证码",
       }
     },
     name: "ForgetPwd",
@@ -55,6 +69,8 @@
     },
     mounted(){
       this.getImgCode()
+      this.baseurl = window.location.href
+      console.log(this.baseurl)
     },
     methods:{
       getImgCode(){
@@ -64,11 +80,74 @@
           this.codeuuid = item.captchaUuid
         })
       },
+      time_sixty(){
+        if(this.phonenumber == ''){
+          this.warn = true;
+          this.warningtext = "手机号不能为空"
+          return;
+        }else if(this.imgcodetext == ''){
+          this.warn = true;
+          this.warningtext = "验证码不能为空"
+          return;
+        }
+        const TIME_COUNT = 60;
+        var that = this;
+        if (!this.timer) {
+          //todo 这里使用固定的customer_id 111111
+          let data = {};
+          data.type = 0;
+          data.uuid = this.codeuuid;
+          data.mobile = this.phonenumber;
+          data.customer_id = 111111;
+          data.captcha = this.imgcodetext;
+          console.log(data);
+          sendSmsCode(data).then(item=>{
+            console.log(item)
+            if(item.status_code == 0){
+              that.show = true;
+              clearInterval(that.timer);
+              that.timer = null;
+              that.code_text = "获取验证码"
+              that.warningtext = item.message
+              that.toastlalert = true
+            }else{
+              that.warningtext = item.message
+              that.toastlalert = true
+            }
+
+          })
+          this.count = TIME_COUNT;
+          this.show = false;
+          //todo获取手机验证码
+          this.timer = setInterval(() => {
+            if (this.count > 0 && this.count <= TIME_COUNT) {
+              this.count--;
+              that.code_text = this.count + "S后可重新获取"
+            } else {
+              this.show = true;
+              clearInterval(this.timer);
+              this.timer = null;
+              that.code_text = "获取验证码"
+            }
+          }, 1000)
+        }else{
+          console.log("不能点击")
+          return ;
+        }
+
+      },
       Refreshode(){
         this.getImgCode()
       },
       nextpass(){
-        this.$router.push('/login/resetpwd')
+        this.$router.push({
+          name:'ResetPwd',
+          params:{
+            'mobile':this.phonenumber,
+            'mobileCode':this.yzm
+          }
+
+        })
       },
       cancel_reset(){
         this.$router.push('/login');
@@ -118,9 +197,12 @@
     text-align: center;
     color:#fff;
   }
+  .wjmm_grey{
+    background-color:#999;
+  }
   .wjmm_tx{
     position:absolute;
-    right:40px;
+    right:65px;
     width: 80px;
     height: 28px;
     img{

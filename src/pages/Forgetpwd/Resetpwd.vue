@@ -7,13 +7,13 @@
 
     <div class="title_box">
       <div class="title_left"></div>
-      <x-input type="password" v-model="username" placeholder="请输入新密码"></x-input>
+      <x-input type="password" v-model="newpwd" placeholder="请输入新密码"></x-input>
       <div class="title_right"></div>
     </div>
 
     <div class="title_box">
       <div class="title_left"></div>
-      <x-input type="password" v-model="pwd" placeholder="再次输入密码"></x-input>
+      <x-input type="password" v-model="newpwdrepeat" placeholder="再次输入密码"></x-input>
       <!--<div class="wjmm">获取验证码</div>-->
       <div class="title_right"></div>
     </div>
@@ -23,34 +23,68 @@
       <div class="submitlogin" @click="resetpwd()">提交</div>
       <div class="title_right"></div>
     </div>
+    <toast v-model="warn" type="warn">{{warningtext}}</toast>
   </div>
 </template>
 
 <script>
-  import { XInput } from 'vux'
+  import {resetPasswordbymobile} from '../../services/api'
+  import { XInput ,Toast} from 'vux'
   export default {
     components: {
-      XInput
+      XInput,
+      Toast
     },
     data(){
       return {
-        username:'',
-        pwd:''
+        newpwd:'',
+        newpwdrepeat:'',
+        phonenumber: '',
+        phoneyzm:'',
+        warn:false,
+        warningtext:""
       }
     },
     name: "ResetPwd",
+    created(){
+      this.phonenumber = this.$route.params.mobile;
+      this.phoneyzm = this.$route.params.mobileCode;
+    },
     beforeCreate() {
       this.$store.state.showBottomNav = false //控制导航栏消失与隐藏
     },
-    // destroyed(){
-    //   this.$store.state.showBottomNav = true
-    // }
     methods:{
+      warningalert(text){
+        this.warningtext = text
+        this.warn = true
+      },
       cancel_reset(){
         this.$router.push('/login');
       },
       resetpwd(){
-        this.$router.push('/login/ResetSuccess');
+        console.log(this.phonenumber)
+        if(this.newpwd == '' || this.newpwdrepeat == ''){
+          this.warningalert("请输入密码")
+          return;
+        }
+        if(this.newpwd!=this.newpwdrepeat){
+          this.warningalert("请保持两次输入密码一致")
+          return;
+        }
+        let data = {}
+        data.mobile = this.phonenumber;
+        data.mobileCode = this.phoneyzm;
+        data.password = this.newpwdrepeat;
+        resetPasswordbymobile(data).then(item=>{
+          console.log(item)
+          if(item.status_code == 1){
+            this.$router.push('/login/ResetSuccess');
+          }else{
+            this.warningalert("修改失败！重新修改")
+          }
+
+        })
+
       }
     }
 
