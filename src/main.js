@@ -33,10 +33,11 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-// axios.defaults.baseURL = 'http://60.205.57.44:8081';
-// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-// axios.defaults.headers.common['Authorization'] = store.state.token;
+
+
+
+import VueScroller from "vue-scroller"
+Vue.use(VueScroller);
 Vue.use(VideoPlayer)
 
 Vue.use(preview)

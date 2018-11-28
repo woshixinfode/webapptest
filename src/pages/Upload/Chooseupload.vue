@@ -23,8 +23,11 @@
 <script>
     export default {
         name: "Chooseupload",
-      created(){
+      beforeCreate(){
           this.$store.state.showBottomNav = false //控制导航栏消失与隐藏
+      },
+      destroyed(){
+        this.$store.state.showBottomNav = true //控制导航栏消失与隐藏
       },
       methods:{
         closepage(){

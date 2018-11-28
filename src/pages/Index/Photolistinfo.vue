@@ -1,198 +1,137 @@
 <template>
-    <div>
-      <div class="header">
-        <div @click="goback()" class="goback" >
-        </div>
-        <div class="search-wrap">
-          <div class="sc"></div>
-        </div>
+  <div>
+    <div class="header">
+      <div @click="goback()" class="goback">
       </div>
-      <div class="coverpic">
-        <img :src='coverpic' alt="">
+      <div class="search-wrap">
+        <div class="sc"></div>
       </div>
-      <div class="listtitle">
-        <p>行走在盐湖之上</p>
-        <p>图片：2198</p>
-      </div>
-      <Listview :itemlist="piclist"></Listview>
     </div>
+    <div class="coverpic">
+      <img :src='coverpic' alt="">
+    </div>
+    <div class="listtitle">
+      <p>{{listTitle}}</p>
+      <p>图片：{{listNum}}</p>
+    </div>
+    <Listview :itemlist="piclist"></Listview>
+  </div>
 </template>
 
 <script>
   import Listview from '../PhotoList/Listview'
-    export default {
-        name: "PhotoListinfo",
-      components:{
-        Listview
-      },
-      data(){
-        return {
-          coverpic:'http://ww1.sinaimg.cn/large/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
-          piclist:[{
-            msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
-            src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
-            w: 800,
-            h: 400,
-            type:"array",
-            number:10
-          },
-            {
-              msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
-              src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
-              w: 1200,
-              h: 900,
-              type:'pic',
-              preview_text:"这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字"
-            }, {
-              msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwwcynw2j20p00b4js9.jpg',
-              src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwwcynw2j20p00b4js9.jpg',
-              type:"array",
-              number:10
-            },{
-              msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
-              src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
-              w: 800,
-              h: 400,
-              type:'pic',
-              preview_text:"这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字"
-            },
-            {
-              msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
-              src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
-              w: 1200,
-              h: 900,
-              type:'pic',
-              preview_text:"这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字"
-            }, {
-              msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwwcynw2j20p00b4js9.jpg',
-              src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwwcynw2j20p00b4js9.jpg',
-              type:'pic',
-              preview_text:"这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字"
-            },{
-              msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
-              src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
-              w: 800,
-              h: 400,
-              type:'pic',
-              preview_text:"这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字"
-            },
-            {
-              msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
-              src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
-              w: 1200,
-              h: 900,
-              type:'pic',
-              preview_text:"这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字"
-            }, {
-              msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwwcynw2j20p00b4js9.jpg',
-              src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwwcynw2j20p00b4js9.jpg',
-              type:'pic',
-              preview_text:"这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字"
-            },{
-              msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
-              src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
-              w: 800,
-              h: 400,
-              type:'pic',
-              preview_text:"这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字"
-            },
-            {
-              msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
-              src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
-              w: 1200,
-              h: 900,
-              type:'pic',
-              preview_text:"这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字"
-            }, {
-              msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwwcynw2j20p00b4js9.jpg',
-              src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwwcynw2j20p00b4js9.jpg',
-              type:'pic',
-              preview_text:"这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字"
-            },{
-              msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
-              src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
-              w: 800,
-              h: 400,
-              type:'pic',
-              preview_text:"这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字"
-            },
-            {
-              msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
-              src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
-              w: 1200,
-              h: 900,
-              type:'pic',
-              preview_text:"这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字"
-            }, {
-              msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwwcynw2j20p00b4js9.jpg',
-              src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwwcynw2j20p00b4js9.jpg',
-              type:'pic',
-              preview_text:"这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字这里是描述性文字，这历史描述性文字"
-            }]
-        }
+  import {getResource} from '../../services/api'
+  export default {
+    name: "PhotoListinfo",
+    components: {
+      Listview
+    },
+    data() {
+      return {
+        coverpic: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
+        listTitle:'',
+        listNum:'',
+        piclist: [],
+        customer_id:localStorage.getItem("customer_id"),
+        groupId:''
+      }
 
+    },
+    created() {
+      console.log(this.$route.params.id)
+      this.groupId = this.$route.params.id,
+      this.coverpic = this.$route.params.group_index_image,
+      this.listTitle = this.$route.params.group_title,
+      this.listNum = this.$route.params.group_total
+      this.getResourcelist()
+    },
+    beforeCreate() {
+      this.$store.state.showBottomNav = true //控制导航栏消失与隐藏
+    },
+    methods: {
+      getResourcelist:function(done){
+        let that = this
+        let data = {};
+        data.paginate = 30
+        data.asset_type = 1
+        data.customer_id =this.customer_id
+        data.group_id = this.groupId
+        console.log(data)
+        getResource(data,1,this.pageNumber).then(item=>{
+          console.log("item")
+          console.log(item)
+          if(item.status_code == 1){
+            that.piclist = that.piclist.concat(item.data.data)
+            done?done():null;
+          }else{
+            that.noData = true
+            done(true)
+          }
+        })
       },
-      created(){
-          console.log(this.$route.params.id)
-      },
-      beforeCreate() {
-        this.$store.state.showBottomNav = true //控制导航栏消失与隐藏
-      },
-      methods:{
-        goback(){
-          this.$router.go(-1)
-        }
+      goback() {
+        window.history.back()
       }
     }
+  }
 </script>
 
 <style scoped>
-  .header{
-    height:25px;
-    position:fixed;
-    top:25px;
-    left:0;
+  .header {
+    height: 25px;
+    position: fixed;
+    top: 25px;
+    left: 0;
     z-index: 99;
     width: 100%;
   }
-  .coverpic{
-    height:200px;
+
+  .coverpic {
+    height: 200px;
     width: 100%;
     overflow: hidden;
   }
-  .coverpic img{
+
+  .coverpic img {
     height: 200px;
+    width: 100%;
   }
-  .goback{
-    height:21px;
+
+  .goback {
+    height: 21px;
     width: 12px;
     float: left;
-    background:url("../../assets/images/newpic/gobackw.png") no-repeat;
+    background: url("../../assets/images/newpic/gobackw.png") no-repeat;
     background-size: cover;
     margin-left: 9px;
   }
-  .search-wrap{
-    height:25px;
+
+  .search-wrap {
+    height: 25px;
   }
-  .sc{
-    height:25px;
+
+  .sc {
+    height: 25px;
     width: 25px;
     float: right;
     background: url("../../assets/images/newpic/icon_sc.png") no-repeat;
     background-size: 24px 24px;
     margin-right: 16px;
   }
-  .listtitle{
+
+  .listtitle {
     text-align: center;
     margin-top: 24px;
   }
-  .listtitle p:first-child{
+
+  .listtitle p:first-child {
     font-size: 16px;
-    color:#333;
+    color: #333;
   }
-  .listtitle p:nth-child(2){
+
+  .listtitle p:nth-child(2) {
     font-size: 12px;
-    color:#999;
+    color: #999;
     margin-top: 8px;
   }
 

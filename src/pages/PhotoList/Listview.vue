@@ -6,17 +6,20 @@
       <a @click="sxpl()" class="sxpl" :class="[idx == 2?'sxplactive':'']"></a>
     </div>
     <div class="sec">
+      <div v-if="itemlist.length==0" class="nodatatitle">无数据可展示</div>
       <div class="img-wrapper" :class="isHundred?'img100':''" v-for="(item, index) in itemlist" :key="index">
-          <img class="img" v-if="item.type == 'pic'"
-               :src="item.src"  preview="repairDetail"
-               :preview-text='item.preview_text'>
+          <img class="img" v-if="item.extension_info"
+               :src="item.extension_info.oss_800"  preview="repairDetail"
+               :preview-text='item.keywords'>
 
-          <img :src="item.src" class="img"  alt="" v-if="item.type == 'array'" @click="gotoInfo(1)">
-          <div class="imgnum"  v-if="item.type == 'array'">
-            <div class="imgnuml" ></div> 120
+          <img v-if="!item.extension_info"
+               :src="item.group_index_image" class="img"  alt=""
+               @click="gotoInfo(item.group_id,item.group_index_image,item.group_title,item.group_total)">
+          <div class="imgnum"  v-if="!item.extension_info">
+            <div class="imgnuml" ></div> {{item.group_online_total}}
           </div>
-
       </div>
+      <div class="nodata" v-if="noData && itemlist.length!=0">已经没有更多数据</div>
     </div>
   </div>
 
@@ -25,12 +28,18 @@
 <script>
   export default {
     name: "List",
-    props: ['itemlist'],
+    props: ['itemlist','noData'],
     data() {
       return {
         isHundred: false,
         idx: 1
       }
+    },
+    mounted(){
+      this.$nextTick(()=>{this.$previewRefresh()})
+    },
+    updated(){
+
     },
     methods: {
       hxpl() {
@@ -43,11 +52,14 @@
         console.log("竖向");
         this.idx = 2
       },
-      gotoInfo(id){
+      gotoInfo(id,group_index_image,group_title,group_total){
         this.$router.push({
           name: 'info',
           params: {
-            id: id
+            id: id,
+            group_index_image:group_index_image,
+            group_title:group_title,
+            group_total:group_total
           }
         })
       }
@@ -124,12 +136,26 @@
     margin: 10px!important;
   }
   .sec {
+    padding-bottom: 130px;
     display: flex; // 这里用到flex布局
     flex-wrap: wrap; // flex中换行的属性
     /*padding: 15px 16px;*/
+    .nodatatitle{
+      text-align: center;
+      line-height: 30px;
+      font-size: 14px;
+      width: 100%;
+    }
     &::after { // 用于最后一行最后的位置显示空白
       content: '';
       flex-grow: 99999; // 放到最大
+    }
+
+    .nodata{
+      width: 100%;
+      text-align: center;
+      height:30px;
+      line-height: 30px;
     }
     .img-wrapper {
       flex-grow: 1; // 根据比例计算每个图片多长等分剩余空间（好难解释，下面用图解释）
