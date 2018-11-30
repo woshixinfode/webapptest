@@ -53,6 +53,8 @@
         this.idx = 2
       },
       gotoInfo(id,group_index_image,group_title,group_total){
+        // console.log($("._v-content").css('transform'));
+        console.log($(".inner").css("transform"));
         this.$router.push({
           name: 'info',
           params: {

@@ -2,6 +2,7 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+const webpack = require('webpack')
 const vuxLoader = require('vux-loader')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -31,6 +32,15 @@ webpackConfig  = {
       'components': resolve('src/components')
     }
   },
+
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jquery: 'jquery',
+      'window.jQuery': 'jquery',
+      jQuery: 'jquery'
+    })
+  ],
   module: {
     rules: [
       {
@@ -64,4 +74,7 @@ webpackConfig  = {
 }
 
 
-module.exports = vuxLoader.merge(webpackConfig, { plugins: ['vux-ui'] })
+module.exports = vuxLoader.merge(webpackConfig, { plugins: [
+  'vux-ui',
+
+  ] })

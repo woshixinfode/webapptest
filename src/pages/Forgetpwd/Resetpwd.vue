@@ -75,6 +75,7 @@
         data.mobile = this.phonenumber;
         data.mobileCode = this.phoneyzm;
         data.password = this.newpwdrepeat;
+        console.log(data)
         resetPasswordbymobile(data).then(item=>{
           console.log(item)
           if(item.status_code == 1){

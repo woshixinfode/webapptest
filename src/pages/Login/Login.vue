@@ -68,8 +68,15 @@
               }else{
                 localStorage.setItem("currentUser_token",item.data.token);//token写入localstorage
                 this.$store.commit('set_token', item.data.token);//token写入store
-                this.getUserInfo();
-                this.$router.push('/')
+                // this.getUserInfo();
+                getuserInfo().then(item=>{
+                  console.log(item)
+                  if(item.status_code == 1){
+                    localStorage.setItem("customer_id",item.data.customer_id);
+                    this.$router.push('/')
+                  }
+                })
+
               }
             })
           }

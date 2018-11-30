@@ -23,7 +23,7 @@
     display: flex;
     flex-direction: row;
     position: fixed;
-    z-index: 9;
+    z-index: 199;
     bottom: 0;
     left: 0;
     right: 0;

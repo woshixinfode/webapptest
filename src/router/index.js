@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+/*首页包括测试文件*/
 import Index from '../pages/Index/Index'
+
 import Upload from '../pages/Broadcast/Broadcast'
 import AudioBook from '../pages/AudioBook/AudioBook'
 import Group from '../pages/Group/Group'
@@ -111,44 +113,5 @@ export default new Router({
       redirect: '/'
     },
   ],
-  scrollBehavior: function(to, from, savedPosition){
-    if (savedPosition) {
-      return savedPosition
-    }
-  },
-  beforeRouteEnter(to,from,next){
 
-    if(!sessionStorage.askPositon || from.path == '/'){//当前页面刷新不需要切换位置
-
-      sessionStorage.askPositon = '';
-
-      next();
-
-    }else{
-
-      next(vm => {
-
-        if(vm && vm.$refs.scrollerBottom){//通过vm实例访问this
-
-          setTimeout(function () {
-
-            vm.$refs.scrollerBottom.scrollTo(0, sessionStorage.askPositon, false);
-
-          },0)//同步转异步操作
-
-        }
-
-      })
-
-    }
-
-  },
-
-  beforeRouteLeave(to,from,next){//记录离开时的位置
-
-    sessionStorage.askPositon = this.$refs.scrollerBottom && this.$refs.scrollerBottom.getPosition() && this.$refs.scrollerBottom.getPosition().top;
-
-    next()
-
-  },
 })

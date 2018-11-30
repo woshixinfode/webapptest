@@ -8,14 +8,14 @@
       </div>
     </header>
     <div class="page-content" ref="viewBox">
-      <scroller  :on-infinite="infinite" ref="my_scroller" noDataText=""  loading-layer-color="#ec4949">
+      <scroller  :on-infinite="infinite" ref="my_scroller" noDataText="">
            <Listview :itemlist="piclist" :noData="noData"></Listview>
       </scroller>
     </div>
     <side-bar></side-bar>
   </div>
 </template>
-
+<!--:on-refresh="refresh" -->
 <script>
   import {getResource} from '../../services/api'
   import { XInput } from 'vux'
@@ -54,7 +54,7 @@
     },
     created() {
       this.customer_id = localStorage.getItem("customer_id")
-      this.getResourcelist()
+      // this.getResourcelist()
     },
     watch:{
       // searchtext(val){
@@ -65,19 +65,8 @@
     },
     mounted(){
 
-      //todo上一页返回时保留位置功能暂时未作
-// // 通过$refs获取dom元素
-//       this.box = this.$refs.viewBox
-//       // 监听这个dom的scroll事件
-//       this.box.addEventListener('scroll', () => {
-//         console.log(" scroll " + this.$refs.viewBox.scrollTop)
-//         //以下是我自己的需求，向下滚动的时候显示“我是有底线的（类似支付宝）”
-//
-//       }, false)
     },
-    updated(){
 
-    },
     methods: {
       //顶部搜索栏事件
       onEnter (val) {
@@ -86,6 +75,7 @@
         this.piclist = []
         this.searchtext = val
         this.getResourcelist()
+        this.$store.state.loading = true
       },
       emptyThis(){
         console.log("清空")
@@ -93,15 +83,18 @@
         this.searchtext = ''
         this.getResourcelist()
       },
-      // refresh() {
-      //   this.pageNumber = 1;
-      //   this.piclist=[]
-      //   this.getResourcelist();
-      // },
+      refresh() {
+        console.log("refresh");
+        this.searchtext = ""
+        this.pageNumber = 1;
+        this.piclist=[]
+        this.getResourcelist();
+      },
       infinite(done) {
+
         this.pageNumber++
-        // console.log(this.pageNumber)
         console.log("infinite");
+        this.$store.state.loading = true
         this.getResourcelist(done);
       },
       getResourcelist:function(done){
@@ -110,27 +103,63 @@
         this.searchtext?data.keywords = this.searchtext:null
         data.paginate = 30
         data.asset_type = 1
-        data.customer_id =this.customer_id
+        data.customer_id =parseInt(this.customer_id)
         console.log(data)
         getResource(data,2,this.pageNumber).then(item=>{
           console.log("item")
           console.log(item)
           if(item.status_code == 1){
             that.piclist = that.piclist.concat(item.data.data)
+            console.log(that.piclist)
+            this.$store.state.loading = false
             done?done():null;
           }else{
             that.noData = true
+            this.$store.state.loading = false
             this.$refs.my_scroller.finishPullToRefresh();
             done?done(true):null;
           }
         })
       },
+      handleScroll () {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+        console.log(scrollTop)
+      },
       showSide:function(){
         this.$store.dispatch('showSideBar')
       },
-    }
-  }
+    },
 
+
+
+
+
+
+
+    beforeRouteEnter(to,from,next){
+      console.log(sessionStorage.askPositon)
+      if(!sessionStorage.askPositon || from.path == '/'){//当前页面刷新不需要切换位置
+        sessionStorage.askPositon = '';
+        next();
+      }else{
+        next(vm => {
+          if(vm && vm.$refs.my_scroller){//通过vm实例访问this
+            setTimeout(function () {
+              vm.$refs.my_scroller.scrollTo(0, sessionStorage.askPositon, true);
+            },0)//同步转异步操作
+          }
+        })
+      }
+    },
+    beforeRouteLeave(to,from,next){//记录离开时的位置
+      sessionStorage.askPositon = this.$refs.my_scroller && this.$refs.my_scroller.getPosition() && this.$refs.my_scroller.getPosition().top;
+      console.log(this.$refs.my_scroller.getPosition().top)
+      next()
+    }
+
+
+
+  }
 </script>
 
 <style lang="less" scoped>
