@@ -4,7 +4,7 @@
       <div @click="goback()" class="goback" >
       </div>
       <div class="search-wrap">
-        <div class="fb">发布</div>
+        <div class="fb" @click="uploadall()">发布</div>
       </div>
     </div>
     <div class="upload">
@@ -104,6 +104,11 @@
       this.limit = this.$route.params.limit;
     },
     methods: {
+      uploadall(){
+        console.log("发布")
+        console.log(this.kindsvalue[0])
+        console.log(this.authvalue[0])
+      },
       goback(){
         this.$router.go(-1)
       },

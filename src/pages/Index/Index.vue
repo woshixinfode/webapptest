@@ -1,15 +1,16 @@
 <template>
   <div>
     <header class="m-header is-fixed is-bg top-search">
-      <div @click="showSide" class="showside" ></div>
+      <div @click="showSide" class="showside"></div>
       <div class="search-wrap">
         <div class="searchicon"></div>
-        <x-input type="text" v-model="searchtext"  @on-enter="onEnter" @on-click-clear-icon="emptyThis()" placeholder="输入你想要搜索的内容"></x-input>
+        <x-input type="text" v-model="searchtext" @on-enter="onEnter" @on-click-clear-icon="emptyThis()"
+                 placeholder="输入你想要搜索的内容"></x-input>
       </div>
     </header>
     <div class="page-content" ref="viewBox">
-      <scroller  :on-infinite="infinite" ref="my_scroller" noDataText="">
-           <Listview :itemlist="piclist" :noData="noData"></Listview>
+      <scroller :on-infinite="infinite" :on-refresh="refresh" ref="my_scroller" noDataText="">
+        <Listview :itemlist="piclist" :noData="noData"></Listview>
       </scroller>
     </div>
     <side-bar></side-bar>
@@ -18,13 +19,14 @@
 <!--:on-refresh="refresh" -->
 <script>
   import {getResource} from '../../services/api'
-  import { XInput } from 'vux'
+  import {XInput} from 'vux'
   import mHeader from '../../components/header'
   import mSwipe from '../../components/swipe'
   import mCell from '../../components/cell'
   import mCellMedia from '../../components/cell-media'
   import SideBar from '../SideBar/Sidebar'
   import Listview from '../PhotoList/Listview'
+
   export default {
     name: 'index',
     components: {
@@ -38,13 +40,13 @@
     },
     data() {
       return {
-        searchtext:'',
+        searchtext: '',
         recommendData: [],
         hotData: [],
-        piclist:[],
-        pageNumber:1,
-        customer_id:'',
-        noData:false,
+        piclist: [],
+        pageNumber: 1,
+        customer_id: '',
+        noData: false,
 
 
       }
@@ -56,28 +58,21 @@
       this.customer_id = localStorage.getItem("customer_id")
       // this.getResourcelist()
     },
-    watch:{
-      // searchtext(val){
-      //   if(val == ""){
-      //     this.emptyThis()
-      //   }
-      // }
-    },
-    mounted(){
+    mounted() {
 
     },
 
     methods: {
       //顶部搜索栏事件
-      onEnter (val) {
+      onEnter(val) {
         console.log('click enter!', val)
-        this.pageNumber=1
+        this.pageNumber = 1
         this.piclist = []
         this.searchtext = val
         this.getResourcelist()
         this.$store.state.loading = true
       },
-      emptyThis(){
+      emptyThis() {
         console.log("清空")
         this.piclist = []
         this.searchtext = ''
@@ -85,10 +80,13 @@
       },
       refresh() {
         console.log("refresh");
-        this.searchtext = ""
-        this.pageNumber = 1;
-        this.piclist=[]
-        this.getResourcelist();
+        // this.searchtext = ""
+        // this.pageNumber = 0;
+        // this.piclist = [];
+        // this.getResourcelist();
+        this.timeout = setTimeout(() => {
+          this.$refs.my_scroller.finishPullToRefresh()
+        }, 1500)
       },
       infinite(done) {
 
@@ -97,100 +95,98 @@
         this.$store.state.loading = true
         this.getResourcelist(done);
       },
-      getResourcelist:function(done){
+      getResourcelist: function (done) {
         let that = this
         let data = {};
-        this.searchtext?data.keywords = this.searchtext:null
+        this.searchtext ? data.keywords = this.searchtext : null
         data.paginate = 30
         data.asset_type = 1
-        data.customer_id =parseInt(this.customer_id)
+        data.customer_id = parseInt(this.customer_id)
         console.log(data)
-        getResource(data,2,this.pageNumber).then(item=>{
+        getResource(data, 2, this.pageNumber).then(item => {
           console.log("item")
           console.log(item)
-          if(item.status_code == 1){
+          if (item.status_code == 1) {
             that.piclist = that.piclist.concat(item.data.data)
             console.log(that.piclist)
             this.$store.state.loading = false
-            done?done():null;
-          }else{
+            done ? done() : null;
+          } else {
             that.noData = true
             this.$store.state.loading = false
             this.$refs.my_scroller.finishPullToRefresh();
-            done?done(true):null;
+            done ? done(true) : null;
           }
         })
       },
-      handleScroll () {
+      handleScroll() {
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
         console.log(scrollTop)
       },
-      showSide:function(){
+      showSide: function () {
         this.$store.dispatch('showSideBar')
       },
     },
 
 
-
-
-
-
-
-    beforeRouteEnter(to,from,next){
+    beforeRouteEnter(to, from, next) {
       console.log(sessionStorage.askPositon)
-      if(!sessionStorage.askPositon || from.path == '/'){//当前页面刷新不需要切换位置
+      if (!sessionStorage.askPositon || from.path == '/') {//当前页面刷新不需要切换位置
         sessionStorage.askPositon = '';
         next();
-      }else{
+      } else {
         next(vm => {
-          if(vm && vm.$refs.my_scroller){//通过vm实例访问this
+          if (vm && vm.$refs.my_scroller) {//通过vm实例访问this
             setTimeout(function () {
-              vm.$refs.my_scroller.scrollTo(0, sessionStorage.askPositon, true);
-            },0)//同步转异步操作
+              vm.$refs.my_scroller.scrollTo(0, sessionStorage.askPositon, false);
+            }, 0)//同步转异步操作
           }
         })
       }
     },
-    beforeRouteLeave(to,from,next){//记录离开时的位置
+    beforeRouteLeave(to, from, next) {//记录离开时的位置
       sessionStorage.askPositon = this.$refs.my_scroller && this.$refs.my_scroller.getPosition() && this.$refs.my_scroller.getPosition().top;
       console.log(this.$refs.my_scroller.getPosition().top)
       next()
     }
 
 
-
   }
 </script>
 
 <style lang="less" scoped>
-  .searchicon{
-    float:left;
+  .searchicon {
+    float: left;
     height: 17px;
     width: 17px;
-    background:url("../../assets/images/newpic/icon_search.png");
+    background: url("../../assets/images/newpic/icon_search.png");
     background-size: cover;
     /*margin-left: 11px;*/
   }
-  .showside{
+
+  .showside {
     width: 28px;
     height: 28px;
     /*margin-left: 16px;*/
-    background:url("../../assets/images/newpic/icon_showside.png") no-repeat center center;
-    background-size:20px 18px;
+    background: url("../../assets/images/newpic/icon_showside.png") no-repeat center center;
+    background-size: 20px 18px;
   }
+
   /*覆盖原有css*/
-  .weui-cell:before{
-    border:none!important;
+  .weui-cell:before {
+    border: none !important;
   }
-  .weui-cell{
-    width:100%;
-    border:none;
+
+  .weui-cell {
+    width: 100%;
+    border: none;
   }
+
   header.m-header {
     padding: 25px 0 25px 10px;
   }
 
-  .is-fixed~.page-content {
+  .is-fixed ~ .page-content {
     padding-top: 70px;
     /*padding-bottom: 50px;*/
   }
@@ -199,14 +195,14 @@
     .search-wrap {
       width: 100%;
       height: 36px;
-      background:#F1F1F2;
+      background: #F1F1F2;
       border-radius: 36px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       color: #c0c0c0;
       padding: 0 12px;
-      margin:0 16px 0 18px;
+      margin: 0 16px 0 18px;
       .placeholder {
         flex: 1;
         text-align: left;
@@ -223,15 +219,17 @@
   .recommend-wrap {
     padding-top: 12px;
   }
-  .page-content{
+
+  .page-content {
     margin-bottom: 90px;
   }
 
-  ._v-container{
-    padding:70px 0 90px 0!important;
-    bottom:90px!important;
+  ._v-container {
+    padding: 70px 0 90px 0 !important;
+    bottom: 90px !important;
   }
-  ._v-content{
+
+  ._v-content {
 
   }
 </style>
