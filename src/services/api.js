@@ -149,8 +149,8 @@ function Data(data) {
 
 /*添加发布接口+++++++*/
 
-export const saveGroup = data =>http.post('/api/upload/direct/saveGroup',data)
-
+// export const saveGroup = (data) =>http.post('/api/upload/direct/saveGroup',data)
+export const saveGroup =(data)=>http.post('/source/upload/direct/saveGroup',data)
 /**
  * {
 	"group_title": "1",                             //组标题       *

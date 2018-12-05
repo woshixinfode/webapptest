@@ -40,8 +40,7 @@
     <div class="fg"></div>
     <div class="selectzone">
       <div class="gjctitle">关键词</div>
-      <div class="tips_zone">
-        <x-textarea placeholder="请使用','分割输入" v-model="group_keywords" :rows="1" :max="1000" autosize></x-textarea>
+      <x-textarea placeholder="请使用','分割输入" v-model="group_keywords" :rows="1" :max="1000" autosize></x-textarea>
         <!--<div>风景</div>-->
         <!--<div>风景区</div>-->
         <!--<div>大海</div>-->
@@ -49,7 +48,7 @@
         <!--<div>可爱</div>-->
         <!--<div>这里是占位</div>-->
 
-      </div>
+
       <!--<group>-->
       <popup-picker title="选择分类" :data="kindslist" v-model="kindsvalue" placeholder="请选择"></popup-picker>
       <popup-picker title="授权相关" :data="authlist" v-model="authvalue" placeholder="请选择"></popup-picker>
@@ -62,6 +61,7 @@
 
     <!--验证警告-->
     <toast v-model="warn" type="warn">{{warningtext}}</toast>
+    <toast v-model="succ" type="success">提交成功</toast>
   </div>
 </template>
 
@@ -99,6 +99,7 @@
         uploadTitle:'',
         uploadsummary:'',
         warn:false,
+        succ:false,//提交成功的标记
         warningtext:"",
 
 
@@ -233,6 +234,15 @@
       },
       uploadall() {
         console.log("发布")
+        console.log(this.uploadFileList)
+        let uploadcomplete = this.uploadFileList.every((element, index, array)=>{
+          return element.status == 'success'
+        })
+        console.log(uploadcomplete)
+        if(!uploadcomplete){
+          this.warningalert("请删除上传失败的文件！")
+          return ;
+        }
         if(this.uploadFileListHadSave.length==0){
           this.warningalert("还没有选择上传图片！")
           return ;
@@ -253,20 +263,35 @@
 
 
         this.uploadFileListHadSave.map(item=>{
-
+            item.copyright = this.baseNamegetCopyright(this.authvalue[0])?this.baseNamegetCopyright(this.authvalue[0]):3
         })
 
         var data = {}
         data.group_title = this.uploadTitle
         data.group_caption = this.uploadsummary
         data.group_keywords = this.group_keywords
-        data.sort_str = this.baseNamegetCategoryid(this.kindsvalue[0])
+        data.sort_str = this.baseNamegetCategoryid(this.kindsvalue[0]).toString()
         data.sort_name = this.kindsvalue[0]
         data.asset_type = 1
         data.group_index = this.uploadFileListHadSave[0].asset_id
         data.items = this.uploadFileListHadSave
-        saveGroup(data).then(item=>{
 
+        console.log(data)
+        saveGroup(data).then(item=>{
+          console.log(item);
+          if(item.status_code == 1){
+            this.succ = true;
+
+            this.uploadTitle = ""
+            this.uploadsummary = ""
+            this.group_keywords = ""
+            this.kindsvalue = []
+            this.authvalue = []
+            this.uploadFileListHadSave = []
+            this.imgList = []
+            this.imgListpost = []
+
+          }
         })
       },
       goback() {
