@@ -125,6 +125,13 @@ export const sendSmsCode = data =>http.post(`/api/sendSmsCode/${data.type}/${dat
 export const getImageBlob = url => http.get(url, undefined, { responseType: 'blob', withCredentials: false })
 
 
+
+
+export const saveUploadingAsset =(data,option) =>http.post('/source/upload/direct/saveAssets',data,null,option)
+
+//直传保存视频资源
+export const saveUploadingAsset_ =(data,option)=>http.post('/source/upload/direct/saveAssets_',data,null,option)
+
 /**
  * 判断用户是否有效
  * @param {object} data  --判断用户是否有效
@@ -138,3 +145,38 @@ function Data(data) {
     }
     return val
 }
+
+
+/*添加发布接口+++++++*/
+
+export const saveGroup = data =>http.post('/api/upload/direct/saveGroup',data)
+
+/**
+ * {
+	"group_title": "1",                             //组标题       *
+	"group_caption":"中国",                         //组说明
+	"group_keywords": "",                           //组关键词
+	"sort_str": "79,87,184",                        //组资源分类 多个分类以父子关系逗号分隔        *
+	"sort_name": "Y-2",                             //组资源分类节点名称路径，父子关系分号相隔     *
+	"asset_type":1,                                 //组类型1图片3视频                             *
+    "group_index":5022986,                              //组封面1为指定该资源为组的封面                *
+	"items":[
+		{
+			"asset_id": 5022986,                          //资源ID                                       *
+            "location": "北京",                     //地点
+            "credit_line": "李四",                  //摄影师
+            "shoot_time": "2018-09-21 08:43:47",    //拍摄时间
+            "keywords": "",                         //资源关键词
+            "copyright": 3,                         //1独家代理，2非独家代理，3自有版权
+            "caption": "",                          //资源说明
+            "signature": null,                      //署名
+            "people": null,                        //人物关键词
+            "country_id":"" ,                     //国家ID
+            "province_id":"",                    //省份id
+            "city_id":"",                       //城市ID
+              "limited":"",                     //限制信息
+		}
+	]
+}
+ *
+ * */

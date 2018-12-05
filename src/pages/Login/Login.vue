@@ -66,18 +66,24 @@
                 this.warningalert(item.message)
                 return;
               }else{
-                localStorage.setItem("currentUser_token",item.data.token);//token写入localstorage
-                this.$store.commit('set_token', item.data.token);//token写入store
-                // this.getUserInfo();
-                getuserInfo().then(item=>{
-                  console.log(item)
-                  if(item.status_code == 1){
-                    localStorage.setItem("customer_id",item.data.customer_id);
-                    this.$router.push('/')
-                  }
-                })
-
+                return item;
               }
+            }).then((item)=>{
+              console.log(item)
+              sessionStorage.setItem("currentUser_token",item.data.token);//token写入localstorage
+              this.$store.commit('set_token', item.data.token);//token写入store
+              let option = {
+                headers: {
+                  Authorization: "Bearer " + item.data.token
+                }
+              };
+              getuserInfo(option).then(item=>{
+                console.log(item)
+                if(item.status_code == 1){
+                  localStorage.setItem("customer_id",item.data.customer_id);
+                  this.$router.push('/')
+                }
+              })
             })
           }
         },
