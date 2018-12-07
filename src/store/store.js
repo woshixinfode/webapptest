@@ -12,7 +12,8 @@ const state={
   hasMessagevideo:true,
   img_upload_cache: [],
   img_paths: [],
-  img_status: 'ready' // 上传状态 ready selected uploading finished
+  img_status: 'ready', // 上传状态 ready selected uploading finished
+  limit:undefined
 }
 
 const mutations={
@@ -84,5 +85,4 @@ export default new Vuex.Store({
 	mutations,
 	getters,
 	actions
-
 })

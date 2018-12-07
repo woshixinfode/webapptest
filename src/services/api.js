@@ -66,7 +66,7 @@ export const contributorSend = (data,option) => http.post('/source/upload/photog
 //获取客户信息
 export const getcontributor = (data,option) => http.post('/source/noValidation/getInfo',data,null,option);
 
-export const resetPasswordbymobile = data=>http.post('./api/user/ReSetPasswordBySms',data)
+export const resetPasswordbymobile = data=>http.post('/api/user/ReSetPasswordBySms',data)
 
 
 
@@ -151,6 +151,7 @@ function Data(data) {
 
 // export const saveGroup = (data) =>http.post('/api/upload/direct/saveGroup',data)
 export const saveGroup =(data)=>http.post('/source/upload/direct/saveGroup',data)
+export const saveSinglepic =(data)=>http.post('/source/upload/direct/saveAssets',data)
 /**
  * {
 	"group_title": "1",                             //组标题       *

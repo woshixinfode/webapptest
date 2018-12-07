@@ -40,6 +40,7 @@
               limit: 1
             }
           })
+          this.$store.state.limit = 1
         },
         uploadlist(){
           this.$router.push({
@@ -48,6 +49,7 @@
               limit: undefined
             }
           })
+          this.$store.state.limit = undefined
         },
         uploadvideo(){
           this.$router.push({
