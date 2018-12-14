@@ -15,6 +15,7 @@ import ResetSuccess from '../pages/Forgetpwd/resetsuccess'
 import IndexView from '../pages/Index/Indexview'
 import PhotoListinfo from '../pages/Index/Photolistinfo'
 
+import FavoriteFileInfo from '../pages/FavoriteFile/FavoriteFileInfo'
 /*上传部分*/
 import Chooseupload from '../pages/Upload/Chooseupload'
 import Uploaddemo from '../pages/Broadcast/Uploaddemo'
@@ -107,6 +108,11 @@ export default new Router({
           component:ResetSuccess
         }
       ]
+    },
+    {
+      path:'favoriteFileInfo',//收藏夹内部展示
+      name:'favoriteFileInfo',
+      component:FavoriteFileInfo
     },
     {
       path: '*',

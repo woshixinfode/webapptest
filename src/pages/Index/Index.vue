@@ -54,6 +54,9 @@
     beforeCreate() {
       this.$store.state.showBottomNav = true //控制导航栏消失与隐藏
     },
+    activated(){
+      this.$store.state.showBottomNav = true //控制导航栏消失与隐藏
+    },
     created() {
       this.customer_id = localStorage.getItem("customer_id")
       // this.getResourcelist()

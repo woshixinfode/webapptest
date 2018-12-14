@@ -29,7 +29,6 @@ const mutations={
   hideBar(state){
     state.isShow=false;
   },
-
   set_img_upload_cache (state, arg) {
     state.img_upload_cache = arg
   },
@@ -39,7 +38,6 @@ const mutations={
   set_img_status (state, arg) {
     state.img_status = arg
   },
-
   changemineDot(state){
 	  console.log("hasMessagemine = false")
 	  state.hasMessagemine = false;
@@ -48,12 +46,10 @@ const mutations={
 	  console.log("hasMessagevideo = false")
 	  state.hasMessagevideo = false;
   },
-
   set_token(state, token) {
     state.token = token
     localStorage.setItem("currentUser_token",token);
   },
-
 }
 
 const getters={
