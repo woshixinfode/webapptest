@@ -12,7 +12,7 @@
 
       <div v-if="itemlist.length==0" class="nodatatitle">无数据可展示</div>
       <div class="img-wrapper" :class="isHundred?'img100':''" v-for="(item, index) in itemlist" :key="index">
-        <div class="sc" @click="getitemid(item.id)">
+        <div class="sc" @click="getitemid(item.id)" v-if="isFavor">
 
         </div>
           <img class="img" v-if="item.extension_info"
@@ -51,7 +51,7 @@
       this._getFavoriteList()
 
     },
-    props: ['itemlist','noData'],
+    props: ['itemlist','noData','isFavor'],
     data() {
       return {
         isHundred: false,

@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2838f7cb-5374-467b-8fdc-d15054f01246" name="Default Changelist" comment="上传问题">
-      <change afterPath="$PROJECT_DIR$/src/pages/FavoriteFile/FavoriteFile.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/FavoriteFile/FavoriteFileInfo.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Index/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Index/Index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Index/Photolistinfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Index/Photolistinfo.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Mine/Mine.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Mine/Mine.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/PhotoList/Listview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/PhotoList/Listview.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/PhotoList/Listview2.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/PhotoList/Listview2.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -75,7 +67,7 @@
           <entry key="png" value="2" />
           <entry key="project" value="2" />
           <entry key="svg" value="1" />
-          <entry key="vue" value="201" />
+          <entry key="vue" value="202" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -88,7 +80,7 @@
           <entry key="Less" value="4" />
           <entry key="PLAIN_TEXT" value="10" />
           <entry key="SVG" value="1" />
-          <entry key="Vue.js" value="201" />
+          <entry key="Vue.js" value="202" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -99,7 +91,7 @@
           <entry key="js" value="2825" />
           <entry key="less" value="4" />
           <entry key="txt" value="36" />
-          <entry key="vue" value="19870" />
+          <entry key="vue" value="19897" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -109,22 +101,13 @@
           <entry key="JavaScript" value="2825" />
           <entry key="Less" value="4" />
           <entry key="PLAIN_TEXT" value="55" />
-          <entry key="Vue.js" value="19870" />
+          <entry key="Vue.js" value="19897" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="84" column="8" lean-forward="true" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/Broadcast/Uploaddemo2.vue">
           <provider selected="true" editor-type-id="text-editor">
@@ -146,7 +129,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/FavoriteFile/FavoriteFileInfo.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
@@ -161,7 +144,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/FavoriteFile/FavoriteFile.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
+            <state relative-caret-position="2460">
               <caret line="180" column="23" lean-forward="true" selection-start-line="180" selection-start-column="23" selection-end-line="180" selection-end-column="23" />
               <folding>
                 <element signature="n#style#0;n#p#0;n#confirm#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -173,8 +156,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/Index/Photolistinfo.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="47" />
+            <state relative-caret-position="80">
+              <caret line="18" column="48" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="48" />
               <folding>
                 <element signature="e#695#739#0" expanded="true" />
               </folding>
@@ -182,15 +165,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/PhotoList/Listview2.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2669">
-              <caret line="157" column="29" lean-forward="true" selection-start-line="157" selection-start-column="29" selection-end-line="157" selection-end-column="29" />
+            <state relative-caret-position="238">
+              <caret line="14" column="65" selection-start-line="14" selection-start-column="65" selection-end-line="14" selection-end-column="65" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="e#1266#1345#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/PhotoList/Listview.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="21" column="50" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -241,7 +233,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>添加</find>
       <find>_v-content</find>
       <find>scrollTo</find>
       <find>top</find>
@@ -270,6 +261,7 @@
       <find>gotoInfo</find>
       <find>ItemList</find>
       <find>addFavoriteAsset</find>
+      <find>itemlist</find>
       <find>chooseFavorfile</find>
     </findStrings>
     <dirStrings>
@@ -328,11 +320,11 @@
         <option value="$PROJECT_DIR$/src/pages/Mine/Mine.vue" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/pages/PhotoList/Listview.vue" />
-        <option value="$PROJECT_DIR$/src/pages/PhotoList/Listview2.vue" />
         <option value="$PROJECT_DIR$/src/pages/Index/Index.vue" />
-        <option value="$PROJECT_DIR$/src/pages/Index/Photolistinfo.vue" />
         <option value="$PROJECT_DIR$/src/pages/FavoriteFile/FavoriteFile.vue" />
         <option value="$PROJECT_DIR$/src/pages/FavoriteFile/FavoriteFileInfo.vue" />
+        <option value="$PROJECT_DIR$/src/pages/Index/Photolistinfo.vue" />
+        <option value="$PROJECT_DIR$/src/pages/PhotoList/Listview2.vue" />
       </list>
     </option>
   </component>
@@ -524,7 +516,7 @@
       <workItem from="1544489815910" duration="11509000" />
       <workItem from="1544577244145" duration="8783000" />
       <workItem from="1544663456951" duration="23717000" />
-      <workItem from="1544750134846" duration="21408000" />
+      <workItem from="1544750134846" duration="22607000" />
     </task>
     <task id="LOCAL-00001" summary="呵呵">
       <created>1542008012036</created>
@@ -649,7 +641,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="580902000" />
+    <option name="totallyTimeSpent" value="582101000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -664,7 +656,7 @@
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18903892" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18903892" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -1006,13 +998,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/PhotoList/Listview.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="109" selection-start-line="9" selection-start-column="109" selection-end-line="9" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/services/api.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -1065,30 +1050,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/PhotoList/Listview2.vue">
+    <entry file="file://$PROJECT_DIR$/src/pages/FavoriteFile/FavoriteFileInfo.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2669">
-          <caret line="157" column="29" lean-forward="true" selection-start-line="157" selection-start-column="29" selection-end-line="157" selection-end-column="29" />
+        <state relative-caret-position="238">
+          <caret line="56" column="25" lean-forward="true" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#1266#1345#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/Index/Photolistinfo.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="47" />
-          <folding>
-            <element signature="e#695#739#0" expanded="true" />
+            <element signature="e#359#404#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/FavoriteFile/FavoriteFile.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
+        <state relative-caret-position="2460">
           <caret line="180" column="23" lean-forward="true" selection-start-line="180" selection-start-column="23" selection-end-line="180" selection-end-column="23" />
           <folding>
             <element signature="n#style#0;n#p#0;n#confirm#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -1096,12 +1070,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/FavoriteFile/FavoriteFileInfo.vue">
+    <entry file="file://$PROJECT_DIR$/src/pages/PhotoList/Listview.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="21" column="50" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/Index/Photolistinfo.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="18" column="48" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="48" />
+          <folding>
+            <element signature="e#695#739#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/PhotoList/Listview2.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="56" column="25" lean-forward="true" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
+          <caret line="14" column="65" selection-start-line="14" selection-start-column="65" selection-end-line="14" selection-end-column="65" />
           <folding>
-            <element signature="e#359#404#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#1266#1345#0" expanded="true" />
           </folding>
         </state>
       </provider>

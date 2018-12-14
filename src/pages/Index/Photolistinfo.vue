@@ -16,7 +16,7 @@
       <p>{{listTitle}}</p>
       <p>图片：{{listNum}}</p>
     </div>
-    <Listview :itemlist="piclist"></Listview>
+    <Listview :itemlist="piclist" :isFavor="true"></Listview>
 
     <!--验证警告-->
     <toast v-model="warn" type="warn">{{warningtext}}</toast>
