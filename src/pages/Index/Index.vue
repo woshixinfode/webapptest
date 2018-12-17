@@ -92,7 +92,6 @@
         }, 1500)
       },
       infinite(done) {
-
         this.pageNumber++
         console.log("infinite");
         this.$store.state.loading = true

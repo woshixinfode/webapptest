@@ -45,7 +45,7 @@
       <!--验证警告-->
       <toast v-model="warn" type="warn">{{warningtext}}</toast>
       <!--comfirm区域-->
-      <div v-transfer-dom>
+      <div v-transfer-dom >
         <confirm v-model="showConfirm"
                  title="确定删除?"
                  @on-cancel="onCancel"

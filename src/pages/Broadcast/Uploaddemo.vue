@@ -4,7 +4,7 @@
       <div @click="goback()" class="goback">
       </div>
       <div class="search-wrap">
-        <div class="fb" @click="uploadall()">发布</div>
+        <div class="fb" @click="isupload()">发布</div>
       </div>
     </div>
     <div class="upload">
@@ -46,16 +46,29 @@
     </div>
     <div class="fg"></div>
     <div class="sm">
-      上传即代表已同意我们的 <span style="color:#0079FE;">原创条款</span>
+      <!--上传即代表已同意我们的 <span style="color:#0079FE;">原创条款</span>-->
     </div>
     <!--验证警告-->
     <toast v-model="warn" type="warn">{{warningtext}}</toast>
     <toast v-model="succ" type="success">提交成功</toast>
+
+    <!--comfirm区域-->
+    <div v-transfer-dom >
+      <confirm v-model="showConfirm"
+               title="确定上传?"
+               @on-cancel="onCancel"
+               @on-confirm="onConfirm"
+               @on-show="onShow"
+               @on-hide="onHide">
+        <p style="text-align:center;">本人对所传图片及图片所附的文字这说明承担全部法律责任</p>
+      </confirm>
+    </div>
   </div>
 </template>
 
 <script>
-  import {XTextarea, Group, XInput, PopupPicker, Toast} from 'vux'
+  import {XTextarea, Group, XInput, PopupPicker, Toast,Confirm,
+    TransferDomDirective as TransferDom} from 'vux'
   import {getfileSuffix, getUid} from "../../mixins";
   import Oss from "ali-oss";
   import axios from "axios";
@@ -71,12 +84,16 @@
 
   export default {
     name: 'Uploaddemo',
+    directives: {
+      TransferDom
+    },
     components: {
       XTextarea,
       Group,
       XInput,
       PopupPicker,
-      Toast
+      Toast,
+      Confirm
     },
     data() {
       return {
@@ -114,7 +131,9 @@
         uploadFileListHadSave: [], //已经初步提交后的集合
         directUploadInfo: {}, //直传所需
         isShowFileList: false, // 第一个dialog 是显示  点击上传 按钮 还是显示上传文件列表
-        draftsItems: [] //草稿箱数据
+        draftsItems: [] ,//草稿箱数据
+
+        showConfirm:false,//comfirm
       }
     },
     watch: {
@@ -205,7 +224,24 @@
         })
 
       },
+      isupload(){
+        this.showConfirm = true
+      },
+      onCancel () {
+        console.log('on cancel')
+      },
+      onConfirm () {
+        console.log('on confirm')
+        this.uploadall()
+      },
+      onHide () {
+        console.log('on hide')
+      },
+      onShow () {
+        console.log('on show')
+      },
       uploadall() {
+
         console.log(this.$store.state.limit)
         this.limit = this.$store.state.limit
         console.log("发布")
@@ -247,8 +283,11 @@
         data.asset_type = 1
         data.group_index = this.uploadFileListHadSave[0].asset_id
         data.items = this.uploadFileListHadSave
-
+        data.items.map(item=>{
+          item.keywords = this.group_keywords
+        })
         console.log(data)
+        console.log(JSON.stringify(data))
         saveGroup(data).then(item => {
           console.log(item);
           if (item.status_code == 1) {

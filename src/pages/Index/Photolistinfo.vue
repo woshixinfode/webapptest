@@ -9,14 +9,21 @@
         </div>
       </div>
     </div>
-    <div class="coverpic">
-      <img :src='coverpic' alt="">
+
+    <div class="page-content">
+      <scroller :on-infinite="infinite" :on-refresh="refresh" ref="my_scroller" noDataText="">
+        <div class="coverpic">
+          <img :src='coverpic' alt="">
+        </div>
+        <div class="listtitle">
+          <p>{{listTitle}}</p>
+          <p>图片：{{listNum}}</p>
+        </div>
+        <Listview :itemlist="piclist" isFavor="true"></Listview>
+      </scroller>
     </div>
-    <div class="listtitle">
-      <p>{{listTitle}}</p>
-      <p>图片：{{listNum}}</p>
-    </div>
-    <Listview :itemlist="piclist" :isFavor="true"></Listview>
+
+
 
     <!--验证警告-->
     <toast v-model="warn" type="warn">{{warningtext}}</toast>
@@ -50,6 +57,7 @@
         successText:'',
         warn:false,
         succ:false,
+        pageNumber: 1,
       }
 
     },
@@ -78,6 +86,18 @@
         this.successText = text
         this.succ = true
       },
+      refresh() {
+        console.log("refresh");
+        this.timeout = setTimeout(() => {
+          this.$refs.my_scroller.finishPullToRefresh()
+        }, 1500)
+      },
+      infinite(done){
+        this.pageNumber++
+        console.log("infinite");
+        this.$store.state.loading = true
+        this.getResourcelist(done);
+      },
       getResourcelist:function(done){
         let that = this
         let data = {};
@@ -91,9 +111,12 @@
           console.log(item)
           if(item.status_code == 1){
             that.piclist = that.piclist.concat(item.data.data)
+            this.$store.state.loading = false
             done?done():null;
           }else{
             that.noData = true
+            this.$store.state.loading = false
+            this.$refs.my_scroller.finishPullToRefresh();
             done?done(true):null;
           }
         })
@@ -181,6 +204,16 @@
     margin-left: 9px;
   }
 
+  .page-content{
+    /*margin-top:250px;*/
+    z-index: 0;
+  }
+
+  ._v-container {
+    padding:0 0 90px 0 !important;
+    bottom: 90px !important;
+  }
+
   .search-wrap {
     height: 25px;
   }
@@ -198,6 +231,8 @@
   .listtitle {
     text-align: center;
     margin-top: 24px;
+    background: #fff;
+    z-index: 999;
   }
 
   .listtitle p:first-child {
