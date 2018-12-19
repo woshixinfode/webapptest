@@ -25,7 +25,7 @@
   import mCell from '../../components/cell'
   import mCellMedia from '../../components/cell-media'
   import SideBar from '../SideBar/Sidebar'
-  import Listview from '../PhotoList/Listview'
+  import Listview from '../PhotoList/Listview2'
 
   export default {
     name: 'index',
@@ -79,6 +79,7 @@
         console.log("清空")
         this.piclist = []
         this.searchtext = ''
+        this.$store.state.loading = true
         this.getResourcelist()
       },
       refresh() {

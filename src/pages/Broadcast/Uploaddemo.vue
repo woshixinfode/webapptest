@@ -77,7 +77,6 @@
     getDirectInfo,
     getDraftsList,
     saveUploadingAsset,
-    saveUploadingAsset_,
     saveGroup,
     newtitle
   } from "../../services/api";

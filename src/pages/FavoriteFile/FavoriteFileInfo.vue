@@ -12,17 +12,20 @@
       <p>图片：{{listNum}}</p>
     </div>
     <Listview :itemlist="piclist"></Listview>
+    <toast v-model="warn" type="warn">{{warningtext}}</toast>
   </div>
 </template>
 
 <script>
+  import {Toast} from 'vux'
   import Listview from '../PhotoList/Listview2'
   import {getFavoriteItem} from "../../services/api"
 
   export default {
     name: "FavoriteFileInfo",
     components: {
-      Listview
+      Listview,
+      Toast
     },
     data() {
       return {
@@ -32,13 +35,15 @@
         coverpic:'',
         listTitle:'',
         listNum:'',
-
+        warn:false,
+        warningtext:''
       }
     },
     created() {
       console.log(this.$route.params.id)
       this.favoriteId = this.$route.params.id
       this.listTitle = this.$route.params.name
+      this.$store.state.loading = true
     },
     beforeCreate() {
       this.$store.state.showBottomNav = false //控制导航栏消失与隐藏
@@ -48,6 +53,11 @@
       this._getFavoriteItem()
     },
     methods: {
+      /*错误提示框*/
+      warningalert(text) {
+        this.warningtext = text
+        this.warn = true
+      },
       goback() {
         window.history.back()
       },
@@ -61,6 +71,11 @@
             this.piclist = item.data.data
             this.listNum = item.data.data.length
             this.coverpic = item.data.data[0].extension_info.oss_800
+            this.$store.state.loading = false
+          }else if(item.status_code == 0){
+            this.$store.state.loading = false
+            this.warningalert("此收藏夹为空！")
+
           }
         })
       }

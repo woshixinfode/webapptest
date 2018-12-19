@@ -4,7 +4,7 @@
       <div @click="goback()" class="goback">
       </div>
       <div class="search-wrap">
-        <div class="sc">
+        <div class="sc" v-show="false">
           <popup-picker  :data="favorlist" v-model="chooseFavorfile" @on-change="onChange"></popup-picker>
         </div>
       </div>
@@ -67,6 +67,7 @@
       this.coverpic = this.$route.params.group_index_image,
       this.listTitle = this.$route.params.group_title,
       this.listNum = this.$route.params.group_total
+      this.$store.state.loading = true
       this.getResourcelist()
       this._getFavoriteList()
 

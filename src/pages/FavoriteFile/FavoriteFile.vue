@@ -82,7 +82,9 @@
         }
       },
       created(){
+        this.$store.state.loading = true
         this._getFavoriteList()
+
       },
       components:{
         XDialog,
@@ -99,7 +101,9 @@
           getFavoriteList(data).then(item=>{
             if(item.status_code == 1){
               console.log(item)
+
               this.favorFile = item.data.data
+              this.$store.state.loading = false
             }
           })
         },
