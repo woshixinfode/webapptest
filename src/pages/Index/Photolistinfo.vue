@@ -9,7 +9,6 @@
         </div>
       </div>
     </div>
-
     <div class="page-content">
       <scroller :on-infinite="infinite" :on-refresh="refresh" ref="my_scroller" noDataText="">
         <div class="coverpic">
@@ -22,9 +21,6 @@
         <Listview :itemlist="piclist" isFavor="true"></Listview>
       </scroller>
     </div>
-
-
-
     <!--验证警告-->
     <toast v-model="warn" type="warn">{{warningtext}}</toast>
     <toast v-model="succ" type="success">{{successText}}</toast>
@@ -74,7 +70,6 @@
     },
     beforeCreate() {
       this.$store.state.showBottomNav = false //控制导航栏消失与隐藏
-
     },
     methods: {
       /*错误提示框*/
